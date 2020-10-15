@@ -81,4 +81,8 @@ public class Usuario {
 	public String getPassword(char sustituto) {
 		return password.replaceAll(".", String.valueOf(sustituto));
 	}
+	
+	public String convertirATexto() {
+		return String.format("ID: %s, email: %s, password: %s", id, email, password);
+	}
 }
