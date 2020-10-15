@@ -3,27 +3,39 @@ package com.ipartek.formacion.uf2216.poo;
 import com.ipartek.formacion.uf2216.bibliotecas.ExpReg;
 
 public class Usuario {
+	// Variable "de clase"
+	private static int contador;
 	// Variables de instancia
 	// Fields (campos)
 	private Long id;
 	private String email, password;
+	
+	// "Constructor estático" ("de clase") Bloque estático
+	static {
+		contador = 0;
+	}
 	
 	// Constructor
 	public Usuario(Long id, String email, String password) {
 		setId(id);
 		setEmail(email);
 		setPassword(password);
+		
+		contador++;
 	}
 	
 	public Usuario(String email, String password) {
 		this(null, email, password);
 	}
 	
-	public Usuario() {}
+	public Usuario() {
+		contador++;
+	}
 
 	// Destructor: No se suele utilizar
 	protected void finalize() {
 		System.out.println("DESTRUCTOR: " + id + "," + email + "," + password);
+		contador--;
 	}
 	
 	// Getters y Setters
@@ -32,7 +44,7 @@ public class Usuario {
 	}
 	
 	public void setId(Integer id) {
-		setId((long)id);
+		setId(new Long(id));
 	}
 	
 	public void setId(Long id) {
@@ -82,6 +94,11 @@ public class Usuario {
 		return password.replaceAll(".", String.valueOf(sustituto));
 	}
 	
+	// Método "de clase"
+	public static int getContador() {
+		return contador;
+	}
+
 	public String convertirATexto() {
 		return String.format("ID: %s, email: %s, password: %s", id, email, password);
 	}
