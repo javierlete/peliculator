@@ -16,7 +16,7 @@ public class Departamento {
 	
 	public void contratar(Usuario usuario) {
 		if(usuario == null) {
-			throw new RuntimeException("No se admite contratar usuarios nulos");
+			throw new PooException("No se admite contratar usuarios nulos");
 		}
 		
 		usuarios.add(usuario);

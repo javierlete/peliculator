@@ -58,19 +58,19 @@ public class Usuario {
 	/**
 	 * Comprueba el email si es válido
 	 * @param email
-	 * @throws RuntimeException en el caso de que el Email no sea válido
+	 * @throws PooException en el caso de que el Email no sea válido
 	 */
 	public void setEmail(String email) {
 		if(email == null) {
-			throw new RuntimeException("No se admiten emails nulos");
+			throw new PooException("No se admiten emails nulos");
 		}
 		
 		if(email.trim().length() == 0) {
-			throw new RuntimeException("No se admite un email vacío");
+			throw new PooException("No se admite un email vacío");
 		}
 		
 		if(!email.matches("\\s*" + ExpReg.EMAIL + "\\s*")) {
-			throw new RuntimeException("No tiene el formato de un email");
+			throw new PooException("No tiene el formato de un email");
 		}
 		
 		this.email = email.trim();
@@ -84,6 +84,50 @@ public class Usuario {
 		this.password = password;
 	}
 	
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", email=" + email + ", password=" + password + "]";
+	}
+
 	/**
 	 * Muestra en lugar de la contraseña, el caracter sustituto
 	 * @param sustituto Caracter que se va a utilizar para sustituir los caracteres de la contraseña

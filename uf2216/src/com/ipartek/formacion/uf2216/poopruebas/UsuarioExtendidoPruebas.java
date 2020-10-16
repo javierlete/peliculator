@@ -7,7 +7,9 @@ import com.ipartek.formacion.uf2216.poo.Usuario;
 import com.ipartek.formacion.uf2216.poo.UsuarioExtendido;
 
 public class UsuarioExtendidoPruebas {
+	@SuppressWarnings("unused")
 	private static int estatica; // En VB.NET Shared
+	@SuppressWarnings("unused")
 	private int noEstatica;
 
 	public static void main(String[] args) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, SecurityException {
@@ -79,6 +81,7 @@ public class UsuarioExtendidoPruebas {
 		System.out.println(ue.getId());
 		System.out.println(ue.getId() instanceof Object);
 
+		@SuppressWarnings("unused")
 		Object o = ue;
 
 		o = new Object();
@@ -98,6 +101,7 @@ public class UsuarioExtendidoPruebas {
 		
 		System.out.println(Usuario.getContador());
 		
+		@SuppressWarnings("unused")
 		Usuario u5 = new Usuario(1L, "usuario@b.c", "contra");
 		UsuarioExtendido ue5 = new UsuarioExtendido(2L, "usuario@extendido.a", "alksdj");
 		
