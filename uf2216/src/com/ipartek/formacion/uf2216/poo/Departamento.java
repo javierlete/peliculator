@@ -1,10 +1,14 @@
 package com.ipartek.formacion.uf2216.poo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Departamento {
+public class Departamento implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	private Long id;
 	private String nombre;
 	private ArrayList<Usuario> usuarios = new ArrayList<>();

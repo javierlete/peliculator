@@ -1,8 +1,13 @@
 package com.ipartek.formacion.uf2216.poo;
 
+import java.io.Serializable;
+
 import com.ipartek.formacion.uf2216.bibliotecas.ExpReg;
 
-public class Usuario {
+public class Usuario implements Serializable {
+
+	private static final long serialVersionUID = -6033642070911568300L;
+	
 	// Variable "de clase"
 	private static int contador;
 	// Variables de instancia
