@@ -2,13 +2,11 @@ package com.ipartek.formacion.uf2216.ejemplodao.presentacion;
 
 import java.util.Scanner;
 
+import static com.ipartek.formacion.uf2216.bibliotecas.Consola.*;
 import com.ipartek.formacion.uf2216.ejemplodao.accesodatos.SuscriptorTreeMapDAO;
 import com.ipartek.formacion.uf2216.ejemplodao.modelos.Suscriptor;
 
 public class PresentacionConsola {
-
-	private static final boolean SIN_ENTER = false;
-
 	private static final Scanner s = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -107,22 +105,6 @@ public class PresentacionConsola {
 		p("5. Borrar");
 		p();
 		p("0. Salir");
-	}
-
-	private static void p(Object objeto, boolean conEnter) {
-		if (conEnter) {
-			p(objeto);
-		} else {
-			System.out.print(objeto);
-		}
-	}
-
-	private static void p(Object objeto) {
-		System.out.println(objeto);
-	}
-
-	private static void p() {
-		System.out.println();
 	}
 
 	private static void listado() {
