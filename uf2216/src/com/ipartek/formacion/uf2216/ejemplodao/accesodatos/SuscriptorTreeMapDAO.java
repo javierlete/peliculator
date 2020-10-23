@@ -2,7 +2,7 @@ package com.ipartek.formacion.uf2216.ejemplodao.accesodatos;
 
 import java.util.TreeMap;
 
-import com.ipartek.formacion.uf2216.ejemplodao.modelos.Suscriptor;
+import com.ipartek.formacion.uf2216.ejemplodao.entidades.Suscriptor;
 
 public class SuscriptorTreeMapDAO {
 	private static TreeMap<Long, Suscriptor> suscriptores = new TreeMap<>();

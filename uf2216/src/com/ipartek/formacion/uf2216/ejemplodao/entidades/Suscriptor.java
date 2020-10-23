@@ -1,26 +1,40 @@
-package com.ipartek.formacion.uf2216.ejemplodao.modelos;
+package com.ipartek.formacion.uf2216.ejemplodao.entidades;
 
 public class Suscriptor {
 	private Long id;
 	private String nombre, apellidos;
 	
 	public Suscriptor(Long id, String nombre, String apellidos) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.apellidos = apellidos;
+		setId(id);
+		setNombre(nombre);
+		setApellidos(apellidos);
 	}
 	
+	public Suscriptor() {
+	}
+
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
+//		String s = null;
+//		
+//		s.toUpperCase();
+		
+		if(id == null || id <= 0) {
+			throw new ModelosException("No se admiten ids menores o iguales a 0");
+		}
+		
 		this.id = id;
 	}
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
+		if(nombre == null || nombre.trim().length() == 0) {
+			throw new ModelosException("El nombre no puede estar vacio");
+		}
+		
 		this.nombre = nombre;
 	}
 	public String getApellidos() {

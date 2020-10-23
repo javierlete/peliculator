@@ -1,22 +1,32 @@
 package com.ipartek.formacion.uf2216.ejemplodao.presentacion;
 
-import java.util.Scanner;
+import static com.ipartek.formacion.uf2216.bibliotecas.Consola.cerrarConsola;
+import static com.ipartek.formacion.uf2216.bibliotecas.Consola.p;
+import static com.ipartek.formacion.uf2216.bibliotecas.Consola.pedirInteger;
+import static com.ipartek.formacion.uf2216.bibliotecas.Consola.pedirLong;
+import static com.ipartek.formacion.uf2216.bibliotecas.Consola.pedirTexto;
 
-import static com.ipartek.formacion.uf2216.bibliotecas.Consola.*;
 import com.ipartek.formacion.uf2216.ejemplodao.accesodatos.SuscriptorTreeMapDAO;
-import com.ipartek.formacion.uf2216.ejemplodao.modelos.Suscriptor;
+import com.ipartek.formacion.uf2216.ejemplodao.entidades.ModelosException;
+import com.ipartek.formacion.uf2216.ejemplodao.entidades.Suscriptor;
 
 public class PresentacionConsola {
-	private static final Scanner s = new Scanner(System.in);
-
 	public static void main(String[] args) {
-		int opcion;
+		try {
+			int opcion;
 
-		do {
-			menu();
-			opcion = pedirOpcion();
-			procesarOpcion(opcion);
-		} while (opcion != 0);
+			do {
+				menu();
+				opcion = pedirOpcion();
+				procesarOpcion(opcion);
+			} while (opcion != 0);
+			
+			cerrarConsola();
+		} catch (Exception e) {
+			p("Error no esperado");
+			p(e.getMessage());
+			p("Contacte con el servicio tecnico");
+		}
 	}
 
 	private static void procesarOpcion(int opcion) {
@@ -51,50 +61,65 @@ public class PresentacionConsola {
 	}
 
 	private static void buscar() {
-		p("¿Que id buscas? ", SIN_ENTER);
-		Long id = s.nextLong();
+		Long id = pedirLong("¿Que id buscas?");
 
-		p(SuscriptorTreeMapDAO.obtenerPorId(id));
+		Suscriptor suscriptor = SuscriptorTreeMapDAO.obtenerPorId(id);
+		
+		if(suscriptor != null) {
+			p(suscriptor);
+		} else {
+			p("No se ha encontrado el suscriptor con id " + id);
+		}
 	}
 
-	private static void anadir() {
-		p("Id: ", SIN_ENTER);
-		Long id = s.nextLong();
-		s.nextLine();
-		
-		p("Nombre: ", SIN_ENTER);
-		String nombre = s.nextLine();
-
-		p("Apellidos: ", SIN_ENTER);
-		String apellidos = s.nextLine();
-
-		SuscriptorTreeMapDAO.insertar(new Suscriptor(id, nombre, apellidos));
+	private static void anadir() {	
+		Suscriptor suscriptor = pedirDatosSuscriptor();
+		SuscriptorTreeMapDAO.insertar(suscriptor);
 	}
 
 	private static void modificar() {
-		p("Id: ", SIN_ENTER);
-		Long id = s.nextLong();
-		s.nextLine();
-
-		p("Nombre: ", SIN_ENTER);
-		String nombre = s.nextLine();
-
-		p("Apellidos: ", SIN_ENTER);
-		String apellidos = s.nextLine();
-
-		SuscriptorTreeMapDAO.modificar(new Suscriptor(id, nombre, apellidos));
+		Suscriptor suscriptor = pedirDatosSuscriptor();
+		SuscriptorTreeMapDAO.modificar(suscriptor);
+	}
+	
+	private static Suscriptor pedirDatosSuscriptor() {
+		Suscriptor suscriptor = new Suscriptor();
+		
+		do {
+			try {
+				suscriptor.setId(pedirLong("Id"));
+			} catch (ModelosException e) {
+				p(e.getMessage());
+			}
+		} while (suscriptor.getId() == null);
+		
+		do {
+			try {
+				suscriptor.setNombre(pedirTexto("Nombre"));
+			} catch (ModelosException e) {
+				p(e.getMessage());
+			}
+		} while (suscriptor.getNombre() == null);
+		
+		do {
+			try {
+				suscriptor.setApellidos(pedirTexto("Apellidos"));
+			} catch (ModelosException e) {
+				p(e.getMessage());
+			}
+		} while (suscriptor.getApellidos() == null);
+		
+		return suscriptor;
 	}
 
 	private static void borrar() {
-		p("Id: ", SIN_ENTER);
-		Long id = s.nextLong();
+		Long id = pedirLong("Id a borrar");
 
 		SuscriptorTreeMapDAO.borrar(id);
 	}
 
 	private static int pedirOpcion() {
-		p("¿Que opcion quieres? ", SIN_ENTER);
-		return s.nextInt();
+		return pedirInteger("¿Que opcion quieres?");
 	}
 
 	private static void menu() {
@@ -108,17 +133,17 @@ public class PresentacionConsola {
 	}
 
 	private static void listado() {
-		System.out.println("-------");
+		p("-------");
 		for (Suscriptor suscriptor : SuscriptorTreeMapDAO.obtenerTodos()) {
-			System.out.println(suscriptor);
+			p(suscriptor);
 		}
-		System.out.println("-------");
+		p("-------");
 	}
 
 	public static void mainPrueba(String[] args) {
 		listado();
 
-		System.out.println(SuscriptorTreeMapDAO.obtenerPorId(2L));
+		p(SuscriptorTreeMapDAO.obtenerPorId(2L));
 
 		SuscriptorTreeMapDAO.insertar(new Suscriptor(3L, "Nuevo", "Nuevez"));
 
