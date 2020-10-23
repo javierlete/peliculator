@@ -22,7 +22,7 @@ public class Suscriptor {
 //		s.toUpperCase();
 		
 		if(id == null || id <= 0) {
-			throw new ModelosException("No se admiten ids menores o iguales a 0");
+			throw new EntidadesException("No se admiten ids menores o iguales a 0");
 		}
 		
 		this.id = id;
@@ -32,7 +32,7 @@ public class Suscriptor {
 	}
 	public void setNombre(String nombre) {
 		if(nombre == null || nombre.trim().length() == 0) {
-			throw new ModelosException("El nombre no puede estar vacio");
+			throw new EntidadesException("El nombre no puede estar vacio");
 		}
 		
 		this.nombre = nombre;

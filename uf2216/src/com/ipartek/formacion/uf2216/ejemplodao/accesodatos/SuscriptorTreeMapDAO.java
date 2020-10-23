@@ -22,14 +22,26 @@ public class SuscriptorTreeMapDAO {
 	}
 	
 	public static void insertar(Suscriptor suscriptor) {
+		if(suscriptores.containsKey(suscriptor.getId())) {
+			throw new InsertarException("Ese id ya esta en uso");
+		}
+		
 		suscriptores.put(suscriptor.getId(), suscriptor);
 	}
 	
 	public static void modificar(Suscriptor suscriptor) {
+		if(!suscriptores.containsKey(suscriptor.getId())) {
+			throw new ModificarException("No existe ese id");
+		}
+		
 		suscriptores.put(suscriptor.getId(), suscriptor);
 	}
 	
 	public static void borrar(Long id) {
+		if(!suscriptores.containsKey(id)) {
+			throw new BorrarException("No existe ese id");
+		}
+		
 		suscriptores.remove(id);
 	}
 }

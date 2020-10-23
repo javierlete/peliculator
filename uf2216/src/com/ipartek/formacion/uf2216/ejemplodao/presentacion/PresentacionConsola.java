@@ -6,8 +6,11 @@ import static com.ipartek.formacion.uf2216.bibliotecas.Consola.pedirInteger;
 import static com.ipartek.formacion.uf2216.bibliotecas.Consola.pedirLong;
 import static com.ipartek.formacion.uf2216.bibliotecas.Consola.pedirTexto;
 
+import com.ipartek.formacion.uf2216.ejemplodao.accesodatos.AccesoDatosException;
+import com.ipartek.formacion.uf2216.ejemplodao.accesodatos.BorrarException;
+import com.ipartek.formacion.uf2216.ejemplodao.accesodatos.InsertarException;
 import com.ipartek.formacion.uf2216.ejemplodao.accesodatos.SuscriptorTreeMapDAO;
-import com.ipartek.formacion.uf2216.ejemplodao.entidades.ModelosException;
+import com.ipartek.formacion.uf2216.ejemplodao.entidades.EntidadesException;
 import com.ipartek.formacion.uf2216.ejemplodao.entidades.Suscriptor;
 
 public class PresentacionConsola {
@@ -26,6 +29,8 @@ public class PresentacionConsola {
 			p("Error no esperado");
 			p(e.getMessage());
 			p("Contacte con el servicio tecnico");
+			
+//			e.printStackTrace();
 		}
 	}
 
@@ -74,12 +79,23 @@ public class PresentacionConsola {
 
 	private static void anadir() {	
 		Suscriptor suscriptor = pedirDatosSuscriptor();
-		SuscriptorTreeMapDAO.insertar(suscriptor);
+		
+		try {
+			SuscriptorTreeMapDAO.insertar(suscriptor);
+		} catch (InsertarException e) {
+			p(e.getMessage());
+			p(SuscriptorTreeMapDAO.obtenerPorId(suscriptor.getId()));
+		}
 	}
 
 	private static void modificar() {
 		Suscriptor suscriptor = pedirDatosSuscriptor();
-		SuscriptorTreeMapDAO.modificar(suscriptor);
+		
+		try {
+			SuscriptorTreeMapDAO.modificar(suscriptor);
+		} catch (AccesoDatosException e) {
+			p(e.getMessage());
+		}
 	}
 	
 	private static Suscriptor pedirDatosSuscriptor() {
@@ -88,7 +104,7 @@ public class PresentacionConsola {
 		do {
 			try {
 				suscriptor.setId(pedirLong("Id"));
-			} catch (ModelosException e) {
+			} catch (EntidadesException e) {
 				p(e.getMessage());
 			}
 		} while (suscriptor.getId() == null);
@@ -96,7 +112,7 @@ public class PresentacionConsola {
 		do {
 			try {
 				suscriptor.setNombre(pedirTexto("Nombre"));
-			} catch (ModelosException e) {
+			} catch (EntidadesException e) {
 				p(e.getMessage());
 			}
 		} while (suscriptor.getNombre() == null);
@@ -104,7 +120,7 @@ public class PresentacionConsola {
 		do {
 			try {
 				suscriptor.setApellidos(pedirTexto("Apellidos"));
-			} catch (ModelosException e) {
+			} catch (EntidadesException e) {
 				p(e.getMessage());
 			}
 		} while (suscriptor.getApellidos() == null);
@@ -115,7 +131,11 @@ public class PresentacionConsola {
 	private static void borrar() {
 		Long id = pedirLong("Id a borrar");
 
-		SuscriptorTreeMapDAO.borrar(id);
+		try {
+			SuscriptorTreeMapDAO.borrar(id);
+		} catch (BorrarException e) {
+			p(e.getMessage());
+		}
 	}
 
 	private static int pedirOpcion() {
