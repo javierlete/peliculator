@@ -5,13 +5,15 @@ import java.util.TreeMap;
 import com.ipartek.formacion.uf2216.ejemplodao.entidades.Suscriptor;
 
 public class SuscriptorTreeMapDAO {
-	private static TreeMap<Long, Suscriptor> suscriptores = new TreeMap<>();
+	private SuscriptorTreeMapDAO() {}
 	
-	static {
-		//DATOS DE PRUEBA
-		suscriptores.put(1L, new Suscriptor(1L, "Pepe", "Perez"));
-		suscriptores.put(2L, new Suscriptor(2L, "Javier", "Lete"));
-	}
+	static TreeMap<Long, Suscriptor> suscriptores = new TreeMap<>();
+	
+//	static {
+//		//DATOS DE PRUEBA
+//		suscriptores.put(1L, new Suscriptor(1L, "Pepe", "Perez"));
+//		suscriptores.put(2L, new Suscriptor(2L, "Javier", "Lete"));
+//	}
 	
 	public static Iterable<Suscriptor> obtenerTodos() {
 		return suscriptores.values();
