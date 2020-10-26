@@ -1,6 +1,9 @@
 package com.ipartek.formacion.uf2216.poo;
 
 public class UsuarioExtendido extends Usuario {
+
+	private static final long serialVersionUID = -3376810124937936265L;
+
 	private String direccion, telefono;
 	
 	public UsuarioExtendido(Long id, String email, String password, String direccion, String telefono) {
