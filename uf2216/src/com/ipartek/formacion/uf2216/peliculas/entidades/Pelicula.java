@@ -17,6 +17,8 @@ public class Pelicula {
 		this.fechaEstreno = fechaEstreno;
 	}
 
+	public Pelicula() {	}
+
 	public Long getId() {
 		return id;
 	}
