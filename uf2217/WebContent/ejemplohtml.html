@@ -1,0 +1,171 @@
+<!DOCTYPE html> <!-- html:5 -->
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejemplo HTML</title>
+</head>
+
+<body id="arriba">
+    <header>
+        <h1>Ejemplos de HTML</h1> <!-- Hay hasta 6 niveles de titulos -->
+        <!-- h${Titulo $}*6 -->
+    </header>
+    <nav>
+        <!-- ul>li*5>a[href="#"]{Men&uacute; $} -->
+        <ul>
+            <li><a href="#parrafos">P&aacute;rrafos</a></li>
+            <li><a href="#">Men&uacute; 2</a></li>
+            <li><a href="#">Men&uacute; 3</a></li>
+            <li><a href="#">Men&uacute; 4</a></li>
+            <li><a href="index.html">Volver a la p&aacute;gina de inicio</a></li>
+        </ul>
+    </nav>
+    <main>
+        <article>
+            <h2>Demostraci&oacute;n de caracter&iacute;sticas de HTML</h2>
+            <section id="parrafos">
+                <h3>P&aacute;rrafos</h3>
+
+                <!-- lorem -->
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat provident dolores minus odit nostrum non distinctio sequi corporis esse, at ipsa dicta temporibus, error atque doloribus deserunt adipisci.
+                    <br />
+                    Recusandae, quam.
+                </p>
+
+                <p><strong>Lorem ipsum</strong> <em>dolor</em> sit amet, consectetur adipisicing elit. Animi veritatis, autem inventore iste odio perspiciatis accusantium repellendus quia tenetur, laboriosam illo vero nam architecto explicabo sapiente totam vitae cum soluta!</p>
+
+                <!-- lorem10 -->
+                <p><a href="https://es.lipsum.com/">Lorem ipsum</a> dolor sit amet, consectetur adipisicing elit. Voluptatibus, iusto.</p>
+
+                <!-- lorem*3 -->
+
+                <pre>public class HolaMundo {
+    public static void main(String[] args){
+        System.out.println("Hola Mundo");
+    }
+}</pre>
+                <p>Las etiquetas <code>&lt;strong></code> y <code>&lt;em></code> son para hacer el contenido m&aacute;s sem&aacute;ntico que usar las alternativas.</p>
+
+                <p>El atajo de teclas <kbd>CTRL-ESPACIO</kbd> sirve para completar</p>
+            </section>
+            <!--            section#listas>h2{Listas}-->
+            <section id="listas">
+                <h3>Listas</h3>
+
+                <h4>Desordenada (Unordered List)</h4>
+
+                <!--                ul>li*3>{Elemento $}-->
+                <ul>
+                    <li>Elemento 1</li>
+                    <li>Elemento 2
+                        <ul>
+                            <li>Subelemento 1</li>
+                            <li>Subelemento 2</li>
+                        </ul>
+                    </li>
+                    <li>Elemento 3</li>
+                </ul>
+
+                <h4>Ordenadas</h4>
+
+                <ol>
+                    <li>Elemento 1</li>
+                    <li>Elemento 2</li>
+                    <li>Elemento 3</li>
+                </ol>
+
+                <h4>De definici&oacute;n</h4>
+
+                <dl>
+                    <dt>HTML</dt>
+                    <dd>Hyper Text Markup Language</dd>
+                    <dt>CSS</dt>
+                    <dd>Cascade Style Sheets</dd>
+                </dl>
+            </section>
+            <section id="tablas">
+                <h3>Tablas</h3>
+
+                <table>
+                    <caption>Listado</caption>
+                    <thead>
+                        <tr>
+                            <th colspan="3">Datos personales</th>
+                            <th rowspan="2">Total ventas</th>
+                        </tr>
+                        <tr>
+                            <th>Id</th>
+                            <th>Email</th>
+                            <th>Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>1</th>
+                            <td>javier@javier.javier</td>
+                            <td>Javier</td>
+                            <td>1500€</td>
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td>pepe@pepe.pepe</td>
+                            <td>Pepe</td>
+                            <td>1000€</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>2500€</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </section>
+            <section id="multimedia">
+                <h3>Im&aacute;genes</h3>
+                <figure>
+                    <img src="imgs/google.png" alt="Logo de Google" />
+                    <figcaption>Logo de Google</figcaption>
+                </figure>
+                
+                <!-- TODO Audio y Video -->
+            </section>
+        </article>
+    </main>
+    <aside>
+        <!-- ul>li{Anuncio $}*3 -->
+        <ul>
+            <li>Anuncio 1</li>
+            <li>Anuncio 2</li>
+            <li>Anuncio 3</li>
+        </ul>
+    </aside>
+    <footer>
+        <p>&copy;2020 Javier Lete</p>
+        <p><a href="#arriba">Arriba</a></p>
+    </footer>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
