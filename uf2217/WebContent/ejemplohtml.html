@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Ejemplo HTML</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/estilos.css" />
 </head>
 
 <body id="arriba">
@@ -18,7 +20,7 @@
             <li><a href="#">Men&uacute; 2</a></li>
             <li><a href="#">Men&uacute; 3</a></li>
             <li><a href="#">Men&uacute; 4</a></li>
-            <li><a href="index.html">Volver a la p&aacute;gina de inicio</a></li>
+            <li><a href="index.html">Inicio</a></li>
         </ul>
     </nav>
     <main>
@@ -133,20 +135,22 @@
 
                 <!-- GIF, PNG, JPG, SVG -->
 
-                <svg xmlns="http://www.w3.org/2000/svg" width="150" height="100" viewBox="0 0 3 2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2">
 
                     <rect width="1" height="2" x="0" fill="#008d46" />
                     <rect width="1" height="2" x="1" fill="#ffffff" />
                     <rect width="1" height="2" x="2" fill="#d2232c" />
                 </svg>
 
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2905.7622672022644!2d-2.9135920000000004!3d43.256403999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4e4fb46238d865%3A0xb671edfb1120ab06!2sIpartek%20Servicios%20Inform%C3%A1ticos!5e0!3m2!1ses!2ses!4v1604075207236!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2905.7622672022644!2d-2.9135920000000004!3d43.256403999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4e4fb46238d865%3A0xb671edfb1120ab06!2sIpartek%20Servicios%20Inform%C3%A1ticos!5e0!3m2!1ses!2ses!4v1604075207236!5m2!1ses!2ses" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 
                 <audio src="sounds/musica.mp3" controls></audio>
 
                 <video src="videos/video.mp4" controls></video>
 
-                <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/SVGjOUnQZ58" allowfullscreen></iframe>
+                <div class="video-container">
+                    <iframe src="https://www.youtube-nocookie.com/embed/SVGjOUnQZ58" allowfullscreen></iframe>
+                </div>
             </section>
 
             <section id="formularios">
@@ -216,7 +220,7 @@
                             <input type="radio" id="nivel3" name="nivel" />
                         </div>
                         <div>
-                           <label for="departamentos">Departamentos</label>
+                            <label for="departamentos">Departamentos</label>
                             <select id="departamentos" multiple>
                                 <optgroup label="Electrónica">
                                     <option value="1">Informática</option>
@@ -235,7 +239,7 @@
                     </fieldset>
                     <fieldset>
                         <legend>Otros de HTML5</legend>
-                        
+
                         <input type="color" />
                         <input type="range" />
                         <input type="search" />
@@ -264,6 +268,4 @@
         <a href="mailto:javier@ipartek.com">javier@ipartek.com</a>
         <a href="tel:944324321">944324321</a>
     </footer>
-</body>
-
-</html>
+</body></html>

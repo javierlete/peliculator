@@ -1,0 +1,419 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    font-size: 0.9em;
+    line-height: 1.5em;
+
+    margin: 0;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table caption {
+    border: 1px solid darkgray;
+    border-bottom: 0;
+
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+thead {
+    background-color: lightgray;
+}
+
+thead th,
+tbody th,
+tbody td,
+tfoot th:last-child {
+    padding: 0.3em;
+    border: 1px solid darkgray;
+}
+
+thead tr:last-child th:first-child,
+tbody th,
+thead tr:first-child th:last-child,
+tbody td:last-child,
+tfoot th:last-child {
+    text-align: right;
+}
+
+thead tr:first-child th:last-child {
+    vertical-align: bottom;
+}
+
+thead tr:last-child th:nth-child(2),
+thead tr:last-child th:nth-child(3) {
+    text-align: left;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #efefef;
+}
+
+tbody tr:hover {
+    background-color: darkgray !important;
+}
+
+dt {
+    font-weight: bold;
+    display: inline;
+
+    float: left;
+    clear: left;
+}
+
+dt:after {
+    content: ':';
+}
+
+dd {
+    margin-left: 1em;
+    display: inline;
+
+    float: left;
+}
+
+dd:after {
+    content: '.';
+}
+
+p {
+    margin-bottom: 2em;
+}
+
+pre,
+code {
+    background-color: #efefef;
+}
+
+pre {
+    padding: 1em;
+    font-size: 0.9em;
+    /* TODO Overflow con scroll */
+}
+
+code {
+    padding: 3px;
+}
+
+kbd {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding: 3px;
+}
+
+strong {
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 1.2em;
+}
+
+em {
+    text-decoration: underline;
+    font-style: normal;
+}
+
+a {
+    text-decoration: none;
+    color: #3333ff;
+    /* #RRGGBB */
+    color: rgb(55, 55, 255);
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+header,
+nav,
+footer {
+    background-color: black;
+    color: white;
+
+    padding: 1em;
+
+    text-align: center;
+}
+
+h1 {
+    line-height: 1.2em;
+}
+
+nav {
+    top: 0;
+
+    z-index: 1;
+
+    border-top: 3px solid white;
+
+    padding: 1px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+nav li {
+    display: block;
+    line-height: 3em;
+
+    font-size: 1.5em;
+}
+
+nav a {
+    color: white;
+    text-transform: uppercase;
+
+    padding: 1em;
+}
+
+nav a:hover {
+    background-color: white;
+    color: black;
+
+    text-decoration: none;
+}
+
+article > h2 {
+    text-align: center;
+}
+
+section > h3 {
+    background-color: lightgray;
+    padding: 1em;
+
+    font-variant: small-caps;
+
+    clear: both;
+
+    width: 100%;
+}
+
+section > h3:before {
+    content: '<';
+}
+
+section > h3:after {
+    content: '>';
+}
+
+section > :not(h3) {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+section ul,
+section ol {
+    margin-left: 1em;
+}
+
+section ol ol,
+section ul ul {
+    padding-left: 0.5em;
+}
+
+figure {
+    border: 1px solid lightgray;
+    padding: 1em;
+}
+
+figcaption {
+    color: darkgray;
+    font-weight: bold;
+
+    text-align: right;
+}
+
+#multimedia img,
+#multimedia svg,
+#multimedia iframe,
+#multimedia video,
+#multimedia audio {
+    width: 100%;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 75%;
+    /*56.25%; 16/9 */
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+fieldset {
+    border: 1px solid lightgray;
+    border-radius: 0.5em;
+
+    margin-bottom: 1em;
+}
+
+legend {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+label {
+    display: inline-block;
+    width: 100%;
+
+    font-weight: bold;
+
+    padding: 0.25em;
+
+    float: left;
+    clear: left;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+}
+
+input[type=radio],
+input[type=checkbox] {
+    height: 2em;
+}
+
+button {
+    clear: left;
+    /* margin-left: 9em; */
+}
+
+input,
+button,
+select,
+textarea {
+    padding: 0.25em;
+    border: 1px solid lightgray;
+    border-radius: 0.5em;
+
+    float: left;
+}
+
+select[multiple] {
+    height: 16em;
+}
+
+optgroup,
+option {
+    font-size: 1.25em;
+    padding: 0.25em;
+}
+
+fieldset:last-child input {
+    margin-bottom: 1em;
+}
+
+aside ul {
+    list-style: none;
+    margin: 0;
+}
+
+footer a {
+    color: white;
+}
+
+footer a[href$=arriba] {
+    position: fixed;
+
+    bottom: 3em;
+    right: 1em;
+
+    padding: 0.5em;
+    border: 2px solid white;
+    border-radius: 0.5em;
+
+    background-color: black;
+}
+
+@media (min-width: 400px) {
+    #formularios fieldset div {
+        display: grid;
+        
+        grid-template-columns: 8em 1fr;
+        column-gap: 5em;
+    }
+    
+    fieldset:last-of-type input {
+        width: 100%;
+    }
+}
+
+@media (min-width: 500px) {
+    nav li {
+        display: inline;
+    }
+    
+    #listas {
+        display: grid;
+
+        /* column-gap: 3em;
+        row-gap: -1em; */
+        
+        grid-template-areas: 
+            "titulo titulo"
+            "tdesordenada tordenada"
+            "desordenada ordenada"
+            "tdefinicion tdefinicion"
+            "definicion definicion";
+    }
+    
+    #listas > h3 {
+        grid-area: titulo;
+    }
+    
+    #listas > h4:first-of-type {
+        grid-area: tdesordenada;
+    }
+    
+    #listas > ul {
+        grid-area: desordenada;
+    }
+    
+   #listas > h4:nth-of-type(2) {
+        grid-area: tordenada;
+    }
+    
+    #listas > ol {
+        grid-area: ordenada;
+    }
+    
+    #listas > h4:nth-of-type(3) {
+        grid-area: tdefinicion;
+    }
+    
+    #listas > dl {
+        grid-area: definicion;
+    }
+}
+
+@media (min-width: 900px) {
+    #listas {
+        grid-template-areas: 
+            "titulo titulo titulo"
+            "tdesordenada tordenada tdefinicion"
+            "desordenada ordenada definicion";
+    }
+}
+
