@@ -1,3 +1,5 @@
+/* TODO Tipos de letra e iconos */
+
 :root {
     --fondo-titulo: black;
     --color-titulo: white;
@@ -158,10 +160,6 @@ h1 {
 }
 
 nav {
-    top: 0;
-
-    z-index: 1;
-
     border-top: 3px solid var(--color-titulo);
 
     padding: 1px;
@@ -371,11 +369,7 @@ footer a[href$=arriba] {
 }
 
 @media (min-width: 500px) {
-    nav ul {
-        display: flex;
-        justify-content: space-around;
-    }
-
+    
     #listas {
         display: grid;
 
@@ -419,8 +413,24 @@ footer a[href$=arriba] {
     }
 }
 
+@media (min-width: 600px) {
+    nav ul {
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    nav {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+}
+
 @media (min-width: 900px) {
+    
     #listas {
+        align-self: start;
+        
         grid-template-areas:
             "titulo titulo titulo"
             "tdesordenada tordenada tdefinicion"
@@ -441,6 +451,8 @@ footer a[href$=arriba] {
 @media (min-width: 1200px) {
     article {
         display: grid;
+        
+        grid-template-columns: 1fr 1fr;
         
         grid-template-areas: 
             "tituloarticulo tituloarticulo"
@@ -472,6 +484,13 @@ footer a[href$=arriba] {
         display: grid;
         
         grid-template-columns: 1fr 1fr;
+        
+        column-gap: var(--margen);
+        row-gap: var(--margen)
+    }
+    
+    .video-container {
+        margin: var(--margen);
     }
     
     #multimedia > h3 {
@@ -514,5 +533,15 @@ footer a[href$=arriba] {
     
     fieldset:last-of-type {
         grid-area: inputs;
+    }
+}
+
+@media (min-width: 1900px) {
+    article {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas: 
+            "tituloarticulo tituloarticulo tituloarticulo"
+            "parrafos listas tablas"
+            "multimedia formularios formularios";
     }
 }
