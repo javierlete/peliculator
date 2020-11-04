@@ -1,3 +1,13 @@
+:root {
+    --fondo-titulo: black;
+    --color-titulo: white;
+
+    --color-secundario: lightgray;
+    --color-terciario: #efefef;
+    
+    --margen: 2em;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -24,7 +34,7 @@ table caption {
 }
 
 thead {
-    background-color: lightgray;
+    background-color: var(--color-secundario);
 }
 
 thead th,
@@ -53,7 +63,7 @@ thead tr:last-child th:nth-child(3) {
 }
 
 tbody tr:nth-child(even) {
-    background-color: #efefef;
+    background-color: var(--color-terciario);
 }
 
 tbody tr:hover {
@@ -89,7 +99,7 @@ p {
 
 pre,
 code {
-    background-color: #efefef;
+    background-color: var(--color-terciario);
 }
 
 pre {
@@ -135,8 +145,8 @@ a:hover {
 header,
 nav,
 footer {
-    background-color: black;
-    color: white;
+    background-color: var(--fondo-titulo);
+    color: var(--color-titulo);
 
     padding: 1em;
 
@@ -152,7 +162,7 @@ nav {
 
     z-index: 1;
 
-    border-top: 3px solid white;
+    border-top: 3px solid var(--color-titulo);
 
     padding: 1px;
 }
@@ -170,15 +180,15 @@ nav li {
 }
 
 nav a {
-    color: white;
+    color: var(--color-titulo);
     text-transform: uppercase;
 
     padding: 1em;
 }
 
 nav a:hover {
-    background-color: white;
-    color: black;
+    background-color: var(--color-titulo);
+    color: var(--fondo-titulo);
 
     text-decoration: none;
 }
@@ -188,7 +198,7 @@ article > h2 {
 }
 
 section > h3 {
-    background-color: lightgray;
+    background-color: var(--color-secundario);
     padding: 1em;
 
     font-variant: small-caps;
@@ -222,7 +232,7 @@ section ul ul {
 }
 
 figure {
-    border: 1px solid lightgray;
+    border: 1px solid var(--color-secundario);
     padding: 1em;
 }
 
@@ -261,7 +271,7 @@ figcaption {
 }
 
 fieldset {
-    border: 1px solid lightgray;
+    border: 1px solid var(--color-secundario);
     border-radius: 0.5em;
 
     margin-bottom: 1em;
@@ -305,7 +315,7 @@ button,
 select,
 textarea {
     padding: 0.25em;
-    border: 1px solid lightgray;
+    border: 1px solid var(--color-secundario);
     border-radius: 0.5em;
 
     float: left;
@@ -331,7 +341,7 @@ aside ul {
 }
 
 footer a {
-    color: white;
+    color: var(--color-titulo);
 }
 
 footer a[href$=arriba] {
@@ -341,68 +351,69 @@ footer a[href$=arriba] {
     right: 1em;
 
     padding: 0.5em;
-    border: 2px solid white;
+    border: 2px solid var(--color-titulo);
     border-radius: 0.5em;
 
-    background-color: black;
+    background-color: var(--fondo-titulo);
 }
 
 @media (min-width: 400px) {
     #formularios fieldset div {
         display: grid;
-        
+
         grid-template-columns: 8em 1fr;
-        column-gap: 5em;
+        column-gap: 1em;
     }
-    
+
     fieldset:last-of-type input {
         width: 100%;
     }
 }
 
 @media (min-width: 500px) {
-    nav li {
-        display: inline;
+    nav ul {
+        display: flex;
+        justify-content: space-around;
     }
-    
+
     #listas {
         display: grid;
 
         /* column-gap: 3em;
         row-gap: -1em; */
-        
-        grid-template-areas: 
+
+        grid-template-areas:
             "titulo titulo"
             "tdesordenada tordenada"
             "desordenada ordenada"
             "tdefinicion tdefinicion"
             "definicion definicion";
     }
-    
+
     #listas > h3 {
         grid-area: titulo;
     }
-    
+
     #listas > h4:first-of-type {
         grid-area: tdesordenada;
     }
-    
+
     #listas > ul {
         grid-area: desordenada;
     }
-    
-   #listas > h4:nth-of-type(2) {
+
+    #listas > h4:nth-of-type(2) {
         grid-area: tordenada;
     }
-    
+
     #listas > ol {
         grid-area: ordenada;
     }
-    
+
     #listas > h4:nth-of-type(3) {
         grid-area: tdefinicion;
     }
-    
+
     #listas > dl {
         grid-area: definicion;
     }
@@ -410,10 +421,98 @@ footer a[href$=arriba] {
 
 @media (min-width: 900px) {
     #listas {
-        grid-template-areas: 
+        grid-template-areas:
             "titulo titulo titulo"
             "tdesordenada tordenada tdefinicion"
             "desordenada ordenada definicion";
     }
+
+    section > :not(h3) {
+        padding-left: var(--margen);
+        padding-right: var(--margen);
+    }
+
+    table {
+        margin: var(--margen);
+        width: calc(100% - 2 * var(--margen));
+    }
 }
 
+@media (min-width: 1200px) {
+    article {
+        display: grid;
+        
+        grid-template-areas: 
+            "tituloarticulo tituloarticulo"
+            "parrafos listas"
+            "tablas tablas"
+            "multimedia multimedia"
+            "formularios formularios";
+    }
+    
+    article > h2 {
+        grid-area: tituloarticulo;
+    }
+    
+    #parrafos {
+        grid-area: parrafos;
+    }
+    
+    #listas {
+        grid-area: listas;
+    }
+    
+    #tablas {
+        grid-area: tablas;
+    }
+    
+    #multimedia {
+        grid-area: multimedia;
+        
+        display: grid;
+        
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    #multimedia > h3 {
+        grid-column: 1 / span 2;
+    }
+    
+    #multimedia > audio {
+        grid-row: 2;
+        grid-column: 1 / span 2;
+    }
+    
+    #multimedia > video {
+        grid-row: 5;
+        grid-column: 1 / span 2;
+    }
+    
+    #formularios {
+        grid-area: formularios;
+    }
+    
+    #formularios form {
+        display: grid;
+        
+        grid-template-areas: 
+            "login datos"
+            "inputs datos";
+        
+        grid-template-columns: 1fr 1fr;
+        column-gap: var(--margen);
+        row-gap: var(--margen);
+    }
+    
+    fieldset:first-of-type {
+        grid-area: login;
+    }
+    
+    fieldset:nth-of-type(2) {
+        grid-area: datos;
+    }
+    
+    fieldset:last-of-type {
+        grid-area: inputs;
+    }
+}
