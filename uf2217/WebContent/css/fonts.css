@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Roboto'), local('Roboto-Regular'), url(../fonts/Roboto/Roboto-Regular.ttf) format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Roboto Bold'), local('Roboto-Bold'), url(../fonts/Roboto/Roboto-Bold.ttf) format('woff2');
+}
+
+@font-face {
+  font-family: 'Sahitya';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Sahitya'), local('Sahitya-Regular'), url(../fonts/Sahitya/Sahitya-Regular.ttf) format('woff2');
+}
+
+@font-face {
+  font-family: 'Sahitya';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Sahitya Bold'), local('Sahitya-Bold'), url(../fonts/Sahitya/Sahitya-Bold.ttf) format('woff2');
+}
