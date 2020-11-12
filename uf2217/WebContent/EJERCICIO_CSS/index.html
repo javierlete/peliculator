@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Orbela</title>
+    <meta name="description" content="Paseos en el parque">
+    <!--<meta name="keywords" content="paseos parque">-->
+    <meta name="author" content="Javier Lete">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="css/orbela.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Orbela</h1>
+        <div id="logo">
+            <img src="imagenes/logo_encabezado.png" alt="Logo Orbela cabecera" />
+        </div>
+        <ul id="idiomas">
+            <li><a href="#">es</a></li>
+            <li><a href="#">eu</a></li>
+        </ul>
+    </header>
+    <nav id="menu-principal">
+        <ul>
+            <li><a href="#">Somos Orbela</a></li>
+            <li><a href="#">Nuestros proyectos</a></li>
+            <li class="activo"><a href="#">Estamos aquí</a></li>
+            <li><a href="#">Blog</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="seccion-principal">
+            <!-- TODO Mejorar este id -->
+            <h2>Principal</h2>
+            <div id="bloque-principal">
+                <!-- TODO Mejorar este id -->
+                <img src="imagenes/hojarasca.jpg" alt="Hojarasca">
+                <blockquote>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</blockquote>
+                <div class="paginacion">
+                    <ul>
+                        <!--li*9>a[href="#"]>{$}-->
+                        <li><a href="#">1</a></li>
+                        <li class="activo"><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">6</a></li>
+                        <li><a href="#">7</a></li>
+                        <li><a href="#">8</a></li>
+                        <li><a href="#">9</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <article>
+                <h2>Bienvenida</h2>
+
+                <p>
+                    Te damos la bienvenida a nuestra web.
+                </p>
+                <p>
+                    Somos <span class="marca">Orbela</span>, una empresa de servicios en los ámbitos del medio ambiente, la cultura, el ocio y el turismo.
+                </p>
+                <p>
+                    Tenemos infinidad de experiencias que nos hacen diferentes y que nos gustaría compartir contigo.
+                </p>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <div id="menus">
+            <!-- TODO Mejorar esto para no usar capa extra -->
+            <div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Somos Orbela</a></li>
+                        <li><a href="#">Nuestros proyectos</a></li>
+                        <li><a href="#">Estamos aquí</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </nav>
+                <nav>
+                    <ul>
+                        <!--li*3>a-->
+                        <li><a href="">Mapa web</a></li>
+                        <li><a href="">Aviso legal</a></li>
+                        <li><a href="">Política de privacidad</a></li>
+                    </ul>
+                </nav>
+                <p id="copyright">
+                    &copy; Orbela 2012.
+                </p>
+            </div>
+        </div>
+        <img src="imagenes/logo_pie.png" alt="Logo Orbela pie" />
+
+        <address>
+            <p>
+                <span class="calle">Jon Arrospide 11</span>
+                <span class="numero">1º Local 9</span>
+                <span class="codigo-postal">48014</span>
+                <span class="poblacion">Bilbao</span>
+                <span class="provincia">Bizkaia</span>
+            </p>
+            <p>
+                <span class="telefono">
+                    <abbr title="Teléfono">Tfno.</abbr>
+                    <a href="tel:944168020">944 16 80 20</a>
+                </span>
+                <span class="fax">
+                    Fax 944 47 72 23
+                </span>
+            </p>
+            <p>
+                Email: <a href="mailto:orbela@orbela.com">orbela@orbela.com</a>
+            </p>
+        </address>
+    </footer>
+</body></html>
