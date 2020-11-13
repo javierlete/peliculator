@@ -15,83 +15,184 @@
 //console.log(confirm('confirm'));
 //console.log(prompt('prompt'));
 
-
-function ejemplosBasicos() {
+(function () {
     'use strict';
 
-    var estaSeguro, numero;
+    function ejemplosBasicos() {
+        var estaSeguro, numero;
 
-    estaSeguro = confirm('¿Estás seguro?');
-    console.log(estaSeguro);
+        estaSeguro = confirm('¿Estás seguro?');
+        console.log(estaSeguro);
 
-    numero = prompt('Introduce un número');
+        numero = prompt('Introduce un número');
 
-    console.log(typeof numero);
-    numero = parseInt(numero, 10);
+        console.log(typeof numero);
+        numero = parseInt(numero, 10);
 
-    if (isNaN(numero)) {//numero === NaN) {
-        alert('Ya te vale. La próxima vez mete un número');
+        if (isNaN(numero)) {//numero === NaN) {
+            alert('Ya te vale. La próxima vez mete un número');
 
-        return;
+            return;
+        }
+
+        if (numero === 0) {
+            alert('¡Mira que guay, es cero!');
+        }
+
+        console.log(typeof numero);
+        console.log(5 + numero);
+
+        console.log(+'5');
+        //console.log(!!'5');
+        //console.log(!!window.console);
     }
 
-    if (numero === 0) {
-        alert('¡Mira que guay, es cero!');
+    function arrays() {
+        var arr = [5, 6, 7, 8];
+
+        console.log(arr[0]);
+        console.log(arr[4]);
+
+        arr[1] = 10;
+
+        arr[4] = 20;
+
+        arr[5] = 'Yepa';
+
+        arr[8] = 'Despitorreeeeeee';
+
+        arr['Casa'] = 'Home';
+
+        arr.Coche = 'Car';
+
+        arr.alerta = alert;
+
+        arr.push(new Date());
+
+        console.log(arr);
+
+        console.log(arr.length);
+
+        var funcion = arr.alerta;
+
+        funcion('Hola desde funcion');
+
+        for (var i = 0; i < arr.length; i++) {
+            console.log(arr[i]);
+        }
+
+        for (var clave in arr) {
+            console.log(clave, arr[clave]);
+        }
+
+        //ES2015
+        for (var dato of arr) {
+            console.log(dato);
+        }
     }
 
-    console.log(typeof numero);
-    console.log(5 + numero);
+    function funcionesComoVariables() {
+        var alerta = alert;
 
-    console.log(+'5');
-    //console.log(!!'5');
-    //console.log(!!window.console);
-}
+        console.log(typeof alerta);
 
-function arrays() {
-    'use strict';
+        console.log(alerta);
 
-    var i, clave, arr = [5, 6, 7, 8];
+        alerta('Hola desde ALERTA');
 
-    console.log(arr[0]);
-    console.log(arr[4]);
+        var operacion = suma;
 
-    arr[1] = 10;
+        console.log(operacion);
 
-    arr[4] = 20;
+        console.log(operacion(5, 7));
 
-    arr[5] = 'Yepa';
+        operacion = resta;
 
-    arr[8] = 'Despitorreeeeeee';
+        console.log(operacion(5, 7));
 
-    arr['Casa'] = 'Home';
+        console.log(typeof suma);
 
-    arr.Coche = 'Car';
+        operacion = function (a, b) {
+            alerta(a * b);
+            return a * b;
+        };
 
-    arr.alerta = alert;
+        console.log(operacion(5, 7));
 
-    arr.push(new Date());
+        //ES2015
+        operacion = (a, b) => a / b;
 
-    console.log(arr);
+        console.log(operacion(10, 5));
 
-    console.log(arr.length);
+        operacion = (a) => -a;
 
-    var funcion = arr.alerta;
+        console.log(operacion(5));
 
-    funcion('Hola desde funcion');
+        function suma(a, b) {
+            return a + b;
+        }
 
-    for (i = 0; i < arr.length; i++) {
-        console.log(arr[i]);
+        function resta(a, b) {
+            return a - b;
+        }
     }
 
-    for (clave in arr) {
-        console.log(clave, arr[clave]);
+    function objetos() {
+        var persona = {};
+
+        persona.nombre = 'Javier';
+        persona.apellidos = {};
+        persona.apellidos.primero = 'Lete';
+        persona.apellidos.segundo = 'García';
+
+        console.log(persona['nombre']);
+
+        console.log(persona);
+
+        console.log(JSON.stringify(persona));
+
+        persona.nombreCompleto = function() {
+            return this.nombre + ' ' + this.apellidos.primero + ' ' + this.apellidos.segundo;
+        };
+
+        console.log(persona.nombreCompleto());
+        // var persona2 = { 
+        //     nombre: prompt('Nombre'), 
+        //     apellidos: { 
+        //         primero: prompt('Primer apellido'), 
+        //         segundo: prompt('Segundo apellido') 
+        //     } 
+        // };
+
+        // console.log(persona2);
+
+        function Persona(nombre, apellidos) {
+            this.nombre = nombre;
+            this.apellidos = apellidos;
+        }
+
+        Persona.prototype.nombreCompleto = function() {
+            return this.nombre + ' ' + this.apellidos;
+        }
+
+        var p = new Persona('Javier', 'Lete');
+        
+        console.log(p.nombreCompleto());
+
+        var p2 = new Persona('Pepe', 'Pérez');
+
+        p2.pedorrear = function() {
+            console.log('PRRRRRR');
+        };
+
+        p2.pedorrear();
     }
 
-    //    for (var dato of arr) {
-    //        console.log(dato);
-    //    }
-}
+    objetos();
 
-arrays();
+    //funcionesComoVariables();
 
-//ejemplosBasicos();
+    //arrays();
+
+    //ejemplosBasicos();
+})();
