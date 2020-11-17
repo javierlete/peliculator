@@ -1,0 +1,12 @@
+[
+    {
+        "nombre": "Javier",
+        "apellidos": "Lete",
+        "direccion": {
+            "calle": "Mi calle"
+        }
+    },
+    {
+        "nombre": "Pepe"
+    }
+]
