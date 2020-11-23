@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Login</title>
-</head>
-<body>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="includes/cabecera.jsp" %>
 
 	<form action="login" method="post">
 		<input type="email" name="email" placeholder="Email" value="${email}" />
-		<input type="password" name="password" placeholder="Contraseña" />
+		<input type="password" name="password" placeholder="ContraseÃ±a" />
 		<button>Login</button>
 		
 		<div class="error">${error}</div>
 	</form>
 
-</body>
-</html>
+<%@ include file="includes/pie.jsp" %>
