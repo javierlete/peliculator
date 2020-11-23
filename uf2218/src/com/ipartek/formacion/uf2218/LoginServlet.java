@@ -21,12 +21,25 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		if("admin@ipartek.com".equals(email) && "contra".equals(password)) {
-			//response.sendRedirect("bienvenida.html");
+			
 			request.setAttribute("email", email);
 			request.getRequestDispatcher("bienvenida.jsp").forward(request, response);
+//			response.sendRedirect("bienvenida.jsp");
+			
+			//bienvenida(request, response);
+			
+//			bienvenida_jsp b = new bienvenida_jsp();
+//			b._jspService(request, response);
 		} else {
-			response.sendRedirect("login.html");
+			request.setAttribute("email", email);
+			request.setAttribute("error", "El usuario o contraseña son incorrectos");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	}
+	
+//	private void bienvenida(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		
+//		response.getWriter().println(request.getAttribute("email"));
+//	}
 
 }
