@@ -22,6 +22,12 @@ public class HolaMundo extends HttpServlet {
 		
 		System.out.println("En la consola del SERVIDOR");
 		
+		System.out.println(request.getHeader("User-agent"));
+		
+		System.out.println(request.getHeader("Accept-language"));
+		
+		System.out.println(request.getRemoteAddr());
+		
 		if(nombre == null) {
 			out.println("Hola");
 		} else {
