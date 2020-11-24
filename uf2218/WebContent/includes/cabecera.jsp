@@ -23,22 +23,23 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
 				<li class="nav-item"><a class="nav-link" href="bienvenida.jsp">Bienvenida</a></li>
-				
+				<li class="nav-item"><a class="nav-link"
+					href="preferencias.jsp">Preferencias</a></li>
 			</ul>
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="preferencias.jsp">Preferencias</a></li>
+				<li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
 			</ul>
 		</div>
 	</nav>
-	<nav aria-label="breadcrumb">
+
+	<!-- <nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="#">Inicio</a></li>
 			<li class="breadcrumb-item"><a href="#">Segundo nivel</a></li>
 			<li class="breadcrumb-item active" aria-current="page">Bootstrap</li>
 		</ol>
-	</nav>
+	</nav> -->
 	<!-- <div class="alert alert-info alert-dismissible fade show" role="alert">
 		Bienvenidos a este ejemplo de Bootstrap
 		<button type="button" class="close" data-dismiss="alert"
@@ -46,3 +47,5 @@
 			<span aria-hidden="true">&times;</span>
 		</button>
 	</div> -->
+
+	<main>
