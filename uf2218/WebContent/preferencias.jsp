@@ -4,20 +4,20 @@
 
 	<h1>Preferencias</h1>
 	
-	<form action="preferencias" method="post">
-		<select name="colores">
+	<form action="preferencias" method="post" class="form-inline">
+		<select name="colores" class="custom-select">
 			<option value="light">Claros</option>
 			<option value="gray">Grises</option>
 			<option value="dark">Oscuros</option>
 		</select>
 		
-		<button>Establecer colores por defecto</button>
+		<button class="btn btn-primary">Establecer colores por defecto</button>
 	</form>
 	
-	<ul>
-		<li><a href="preferencias?colores=light">Claros</a></li>
-		<li><a href="preferencias?colores=gray">Grises</a></li>
-		<li><a href="preferencias?colores=dark">Oscuros</a></li>
+	<ul class="nav">
+		<li><a class="btn btn-secondary" href="preferencias?colores=light">Claros</a></li>
+		<li><a class="btn btn-secondary" href="preferencias?colores=gray">Grises</a></li>
+		<li><a class="btn btn-secondary" href="preferencias?colores=dark">Oscuros</a></li>
 	</ul>
 
 <%@ include file="includes/pie.jsp" %>
