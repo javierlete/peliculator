@@ -2,6 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="includes/cabecera.jsp" %>
 
-<h1>Bienvenido ${email} <%=request.getAttribute("email")%></h1>
+<h1>Bienvenido ${email} <%=session.getAttribute("email")%></h1>
 
 <%@ include file="includes/pie.jsp" %>

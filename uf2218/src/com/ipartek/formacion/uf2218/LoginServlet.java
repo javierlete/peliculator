@@ -1,11 +1,13 @@
 package com.ipartek.formacion.uf2218;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -21,8 +23,9 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		if("admin@ipartek.com".equals(email) && "contra".equals(password)) {
+			HttpSession session = request.getSession();
 			
-			request.setAttribute("email", email);
+			session.setAttribute("email", email);
 			request.getRequestDispatcher("bienvenida.jsp").forward(request, response);
 //			response.sendRedirect("bienvenida.jsp");
 			
