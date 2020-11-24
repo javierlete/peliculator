@@ -28,7 +28,12 @@
 					href="preferencias.jsp">Preferencias</a></li>
 			</ul>
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
+				<% if(session.getAttribute("email") != null) { %>
+					<li class="nav-item navbar-text">${email}</li>
+					<li class="nav-item"><a class="nav-link" href="desconectar">Desconectar</a></li>
+				<% } else { %>
+					<li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
+				<% } %>
 			</ul>
 		</div>
 	</nav>
