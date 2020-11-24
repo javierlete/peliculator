@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,13 +29,15 @@
 					href="preferencias.jsp">Preferencias</a></li>
 			</ul>
 			<ul class="navbar-nav">
-				<c:if test="${sessionScope.email != null}">
-					<li class="nav-item navbar-text">${email}</li>
-					<li class="nav-item"><a class="nav-link" href="desconectar">Desconectar</a></li>
-				</c:if>
-				<c:if test="${sessionScope.email == null}">
-					<li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
-				</c:if>
+				<c:choose>
+					<c:when test="${sessionScope.email != null}">
+						<li class="nav-item navbar-text">${email}</li>
+						<li class="nav-item"><a class="nav-link" href="desconectar">Desconectar</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 	</nav>
