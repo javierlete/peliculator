@@ -11,6 +11,7 @@
 				<label for="id" class="col-sm-2 col-form-label">Id</label>
 				<div class="col-sm-10">
 					<input type="number" class="form-control" id="id" name="id"
+					value="${pelicula.id}"
 						readonly>
 				</div>
 			</div>
@@ -19,7 +20,7 @@
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="titulo" name="titulo"
 						required minlength="3" pattern="[\p{L} ]+"
-						placeholder="El título de la película">
+						placeholder="El título de la película" value="${pelicula.titulo}">
 					<div class="invalid-feedback">El título debe utilizar sólo
 						letras o espacios y debe tener una longitud mínima de tres
 						caracteres</div>
@@ -29,7 +30,7 @@
 			<div class="form-group row">
 				<label for="genero" class="col-sm-2 col-form-label">Género</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="genero" name="genero">
+					<input type="text" class="form-control" id="genero" name="genero" value="${pelicula.genero}">
 				</div>
 			</div>
 
@@ -38,7 +39,7 @@
 					de estreno</label>
 				<div class="col-sm-10">
 					<input type="date" class="form-control" id="fecha-estreno"
-						name="fecha-estreno">
+						name="fecha-estreno" value="${pelicula.fechaEstreno}">
 				</div>
 			</div>
 
