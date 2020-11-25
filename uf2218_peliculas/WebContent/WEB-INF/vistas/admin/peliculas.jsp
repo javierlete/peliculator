@@ -27,7 +27,7 @@
 						<button class="btn btn-secondary">Editar con Post</button>
 
 						<a class="btn btn-danger"
-							onclick="return confirm('¿Estás seguro?')" href="#">Borrar</a>
+							onclick="return confirm('¿Estás seguro?')" href="admin/borrar?id=${pelicula.id}">Borrar</a>
 
 					</form>
 				</td>
