@@ -9,6 +9,7 @@
 <base href="${pageContext.request.contextPath}/" />
 
 <link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/dataTables.bootstrap4.min.css" />
 
 <title>Peliculator</title>
 </head>
