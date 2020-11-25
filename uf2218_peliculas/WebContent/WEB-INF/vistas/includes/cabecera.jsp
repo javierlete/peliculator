@@ -13,9 +13,9 @@
 
 <title>Peliculator</title>
 </head>
-<body class="container">
+<body>
 	<nav id="menu-principal"
-		class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 		<a class="navbar-brand" href="#">Listado de Películas</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -26,8 +26,10 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link" href="admin/listado">Listado de películas</a></li>
-				<li class="nav-item"><a class="nav-link" href="admin/pelicula">Añadir película</a></li>
+				<li class="nav-item"><a class="nav-link" href="admin/listado">Listado
+						de películas</a></li>
+				<li class="nav-item"><a class="nav-link" href="admin/pelicula">Añadir
+						película</a></li>
 			</ul>
 			<ul class="navbar-nav">
 				<c:choose>
@@ -42,22 +44,27 @@
 			</ul>
 		</div>
 	</nav>
-	
+
 	<%-- <nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="#">Inicio</a></li>
 			<li class="breadcrumb-item"><a href="#">Segundo nivel</a></li>
 			<li class="breadcrumb-item active" aria-current="page">Bootstrap</li>
 		</ol>
-	</nav>
-	<div class="alert alert-info alert-dismissible fade show" role="alert">
-		Bienvenidos a este ejemplo de Bootstrap
-		<button type="button" class="close" data-dismiss="alert"
-			aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
-	</div> --%>
+	</nav>--%>
+	<c:if test="${alertamensaje != null}">
+		<div class="alert alert-${alertatipo} alert-dismissible fade show"
+			role="alert">
+			${alertamensaje}
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		
+		<% session.removeAttribute("alertamensaje"); session.removeAttribute("alertatipo"); %>
+	</c:if>
 
 	<%-- ${pageContext.request.contextPath} --%>
 
-	<main style="padding-top: 5em;">
+	<main class="container">

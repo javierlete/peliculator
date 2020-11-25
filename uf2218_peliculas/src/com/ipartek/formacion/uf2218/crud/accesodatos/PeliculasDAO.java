@@ -3,7 +3,7 @@ package com.ipartek.formacion.uf2218.crud.accesodatos;
 import java.time.LocalDate;
 import java.util.TreeMap;
 
-import com.ipartek.formacion.uf2218.crud.entidades.Pelicula;
+import com.ipartek.formacion.uf2218.crud.modelos.Pelicula;
 
 public class PeliculasDAO {
 	private PeliculasDAO() {}

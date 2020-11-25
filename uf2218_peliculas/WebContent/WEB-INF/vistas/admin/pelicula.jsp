@@ -6,31 +6,30 @@
 	<h1 class="col-12">Edición de película</h1>
 
 	<div class="col-12">
-		<form action="admin/guardar" class="needs-validation" novalidate method="post">
+		<form action="admin/guardar" method="post">
 			<div class="form-group row">
 				<label for="id" class="col-sm-2 col-form-label">Id</label>
 				<div class="col-sm-10">
 					<input type="number" class="form-control" id="id" name="id"
-					value="${pelicula.id}"
-						readonly>
+						value="${pelicula.id}" readonly>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="nombre" class="col-sm-2 col-form-label">Título</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="titulo" name="titulo"
-						required minlength="3" pattern="[\p{L} ]+"
-						placeholder="El título de la película" value="${pelicula.titulo}">
-					<div class="invalid-feedback">El título debe utilizar sólo
-						letras o espacios y debe tener una longitud mínima de tres
-						caracteres</div>
+					<input type="text"
+						class="form-control ${pelicula.errorTitulo != null ? 'is-invalid' : '' }"
+						id="titulo" name="titulo" placeholder="El título de la película"
+						value="${pelicula.titulo}">
+					<div class="invalid-feedback">${pelicula.errorTitulo}</div>
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label for="genero" class="col-sm-2 col-form-label">Género</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="genero" name="genero" value="${pelicula.genero}">
+					<input type="text" class="form-control" id="genero" name="genero"
+						value="${pelicula.genero}">
 				</div>
 			</div>
 
@@ -38,8 +37,11 @@
 				<label for="fecha-estreno" class="col-sm-2 col-form-label">Fecha
 					de estreno</label>
 				<div class="col-sm-10">
-					<input type="date" class="form-control" id="fecha-estreno"
-						name="fecha-estreno" value="${pelicula.fechaEstreno}">
+					<input type="date"
+						class="form-control ${pelicula.errorFechaEstreno != null ? 'is-invalid' : '' }"
+						id="fecha-estreno" name="fecha-estreno"
+						value="${pelicula.fechaEstreno}">
+					<div class="invalid-feedback">${pelicula.errorFechaEstreno}</div>
 				</div>
 			</div>
 
@@ -51,42 +53,6 @@
 			</div>
 		</form>
 
-		<script>
-			// Example starter JavaScript for disabling form submissions if there are invalid fields
-			(function() {
-				'use strict';
-				window
-						.addEventListener(
-								'load',
-								function() {
-									// Fetch all the forms we want to apply custom Bootstrap validation styles to
-									var forms = document
-											.getElementsByClassName('needs-validation');
-									// Loop over them and prevent submission
-									var validation = Array.prototype.filter
-											.call(
-													forms,
-													function(form) {
-														form
-																.addEventListener(
-																		'submit',
-																		function(
-																				event) {
-																			if (form
-																					.checkValidity() === false) {
-																				event
-																						.preventDefault();
-																				event
-																						.stopPropagation();
-																			}
-																			form.classList
-																					.add('was-validated');
-																		},
-																		false);
-													});
-								}, false);
-			})();
-		</script>
 	</div>
 
 

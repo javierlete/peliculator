@@ -1,12 +1,15 @@
 package com.ipartek.formacion.uf2218.crud.controladores;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.ipartek.formacion.uf2218.crud.accesodatos.AccesoDatosException;
 import com.ipartek.formacion.uf2218.crud.accesodatos.PeliculasDAO;
 
 @WebServlet("/admin/borrar")
@@ -18,7 +21,22 @@ public class PeliculaBorrarServlet extends HttpServlet {
 		
 		Long id = Long.parseLong(sId);
 		
-		PeliculasDAO.borrar(id);
+		String alertaMensaje, alertaTipo;
+		
+		try {
+			PeliculasDAO.borrar(id);
+			
+			alertaMensaje = "Registro " + id + " borrado correctamente";
+			alertaTipo = "success";
+		} catch (AccesoDatosException e) {
+			alertaMensaje = "El registro a borrar no existe";
+			alertaTipo = "warning";
+		}
+		
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("alertatipo", alertaTipo);
+		session.setAttribute("alertamensaje", alertaMensaje);
 		
 		response.sendRedirect(request.getContextPath() + "/admin/listado");
 	}

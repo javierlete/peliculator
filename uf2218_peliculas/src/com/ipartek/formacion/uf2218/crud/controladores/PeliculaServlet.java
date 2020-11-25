@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.formacion.uf2218.crud.accesodatos.PeliculasDAO;
-import com.ipartek.formacion.uf2218.crud.entidades.Pelicula;
+import com.ipartek.formacion.uf2218.crud.modelos.Pelicula;
 
 @WebServlet("/admin/pelicula")
 /**

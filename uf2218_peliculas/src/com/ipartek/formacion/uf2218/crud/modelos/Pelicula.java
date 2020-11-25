@@ -1,4 +1,4 @@
-package com.ipartek.formacion.uf2218.crud.entidades;
+package com.ipartek.formacion.uf2218.crud.modelos;
 
 import java.time.LocalDate;
 
@@ -7,14 +7,15 @@ public class Pelicula {
 	private String titulo, genero;
 	private LocalDate fechaEstreno;
 	
-	// TODO actores de la película
+	private boolean correcto = true;
+	
+	private String errorId, errorTitulo, errorGenero, errorFechaEstreno;
 	
 	public Pelicula(Long id, String titulo, String genero, LocalDate fechaEstreno) {
-		super();
-		this.id = id;
-		this.titulo = titulo;
-		this.genero = genero;
-		this.fechaEstreno = fechaEstreno;
+		setId(id);
+		setTitulo(titulo);
+		setGenero(genero);
+		setFechaEstreno(fechaEstreno);
 	}
 
 	public Pelicula() {	}
@@ -30,8 +31,11 @@ public class Pelicula {
 	public String getTitulo() {
 		return titulo;
 	}
-
+	
 	public void setTitulo(String titulo) {
+		if(titulo == null || titulo.trim().length() < 3) {
+			setErrorTitulo("No se admiten títulos de menos de 3 caracteres");
+		}
 		this.titulo = titulo;
 	}
 
@@ -48,7 +52,54 @@ public class Pelicula {
 	}
 
 	public void setFechaEstreno(LocalDate fechaEstreno) {
+		if(fechaEstreno.isAfter(LocalDate.now())) {
+			setErrorFechaEstreno("No se admiten estrenos futuros");
+		}
 		this.fechaEstreno = fechaEstreno;
+	}
+
+	public boolean isCorrecto() {
+		return correcto;
+	}
+
+	public void setCorrecto(boolean correcto) {
+		this.correcto = correcto;
+	}
+
+	public String getErrorId() {
+		return errorId;
+	}
+
+	public void setErrorId(String errorId) {
+		correcto = false;
+		this.errorId = errorId;
+	}
+
+	public String getErrorTitulo() {
+		return errorTitulo;
+	}
+
+	public void setErrorTitulo(String errorTitulo) {
+		correcto = false;
+		this.errorTitulo = errorTitulo;
+	}
+
+	public String getErrorGenero() {
+		return errorGenero;
+	}
+
+	public void setErrorGenero(String errorGenero) {
+		correcto = false;
+		this.errorGenero = errorGenero;
+	}
+
+	public String getErrorFechaEstreno() {
+		return errorFechaEstreno;
+	}
+
+	public void setErrorFechaEstreno(String errorFechaEstreno) {
+		correcto = false;
+		this.errorFechaEstreno = errorFechaEstreno;
 	}
 
 	@Override
