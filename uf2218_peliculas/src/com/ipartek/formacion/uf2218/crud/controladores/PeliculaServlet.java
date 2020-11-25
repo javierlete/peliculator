@@ -36,5 +36,10 @@ public class PeliculaServlet extends HttpServlet {
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/vistas/admin/pelicula.jsp");
 		requestDispatcher.forward(request, response);
 	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}	
+	
 
 }
