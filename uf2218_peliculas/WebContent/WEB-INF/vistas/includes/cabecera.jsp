@@ -10,7 +10,7 @@
 
 <link rel="stylesheet" href="css/bootstrap.min.css" />
 
-<title>Ejemplos de JSP</title>
+<title>Peliculator</title>
 </head>
 <body class="container">
 	<nav id="menu-principal"
@@ -25,8 +25,8 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link" href="listado">Listado de películas</a></li>
-				<li class="nav-item"><a class="nav-link" href="pelicula">Añadir película</a></li>
+				<li class="nav-item"><a class="nav-link" href="admin/listado">Listado de películas</a></li>
+				<li class="nav-item"><a class="nav-link" href="admin/pelicula">Añadir película</a></li>
 			</ul>
 			<ul class="navbar-nav">
 				<c:choose>

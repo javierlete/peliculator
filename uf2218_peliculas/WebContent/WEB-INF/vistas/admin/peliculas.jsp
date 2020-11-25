@@ -20,9 +20,9 @@
 				<td>${pelicula.genero}</td>
 				<td>${pelicula.fechaEstreno}</td>
 				<td class="text-right"><a class="btn btn-primary"
-					href="empleado.html">Editar</a> <a class="btn btn-danger"
+					href="admin/pelicula">Editar</a> <a class="btn btn-danger"
 					onclick="return confirm('¿Estás seguro?')"
-					href="javascript:alert('BORRADO 1')">Borrar</a></td>
+					href="#">Borrar</a></td>
 			</tr>
 		</c:forEach>
 	</tbody>
