@@ -6,7 +6,7 @@
 	<h1 class="col-12">Edición de película</h1>
 
 	<div class="col-12">
-		<form action="index.html" class="needs-validation" novalidate>
+		<form action="admin/guardar" class="needs-validation" novalidate method="post">
 			<div class="form-group row">
 				<label for="id" class="col-sm-2 col-form-label">Id</label>
 				<div class="col-sm-10">
