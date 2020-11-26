@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.uf2218.crud.accesodatos.AccesoDatosException;
-import com.ipartek.formacion.uf2218.crud.accesodatos.PeliculasDAO;
 
 @WebServlet("/admin/borrar")
 public class PeliculaBorrarServlet extends HttpServlet {
@@ -24,7 +23,7 @@ public class PeliculaBorrarServlet extends HttpServlet {
 		String alertaMensaje, alertaTipo;
 		
 		try {
-			PeliculasDAO.borrar(id);
+			Configuracion.dao.borrar(id);
 			
 			alertaMensaje = "Registro " + id + " borrado correctamente";
 			alertaTipo = "success";

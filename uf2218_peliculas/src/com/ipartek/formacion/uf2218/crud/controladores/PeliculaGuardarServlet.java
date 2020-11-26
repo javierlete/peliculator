@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.uf2218.crud.accesodatos.AccesoDatosException;
-import com.ipartek.formacion.uf2218.crud.accesodatos.PeliculasDAO;
 import com.ipartek.formacion.uf2218.crud.modelos.Pelicula;
 
 @WebServlet("/admin/guardar")
@@ -41,11 +40,11 @@ public class PeliculaGuardarServlet extends HttpServlet {
 		try {
 			if(pelicula.getId() == null) {
 				op = "inserción";
-				PeliculasDAO.insertar(pelicula);
+				Configuracion.dao.insertar(pelicula);
 				
 			} else {
 				op = "modificación";
-				PeliculasDAO.modificar(pelicula);
+				Configuracion.dao.modificar(pelicula);
 			}
 			
 			alertaMensaje = "La " + op + " se ha hecho correctamente";

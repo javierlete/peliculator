@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ipartek.formacion.uf2218.crud.accesodatos.PeliculasDAO;
 import com.ipartek.formacion.uf2218.crud.modelos.Pelicula;
 
 @WebServlet("/admin/pelicula")
@@ -28,7 +27,7 @@ public class PeliculaServlet extends HttpServlet {
 		if(sId != null) {
 			Long id = Long.parseLong(sId);
 		
-			Pelicula pelicula = PeliculasDAO.obtenerPorId(id);
+			Pelicula pelicula = Configuracion.dao.obtenerPorId(id);
 			
 			request.setAttribute("pelicula", pelicula);
 		}
