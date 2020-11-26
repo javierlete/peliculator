@@ -26,19 +26,21 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link" href="admin/listado">Listado
-						de películas</a></li>
-				<li class="nav-item"><a class="nav-link" href="admin/pelicula">Añadir
-						película</a></li>
+				<c:if test="${sessionScope.email != null}">
+					<li class="nav-item"><a class="nav-link" href="admin/listado">Listado
+							de películas</a></li>
+					<li class="nav-item"><a class="nav-link" href="admin/pelicula">Añadir
+							película</a></li>
+				</c:if>
 			</ul>
 			<ul class="navbar-nav">
 				<c:choose>
 					<c:when test="${sessionScope.email != null}">
 						<li class="nav-item navbar-text">${email}</li>
-						<li class="nav-item"><a class="nav-link" href="desconectar">Desconectar</a></li>
+						<li class="nav-item"><a class="nav-link" href="logout">Desconectar</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
+						<li class="nav-item"><a class="nav-link" href="login">Login</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
@@ -61,8 +63,11 @@
 				<span aria-hidden="true">&times;</span>
 			</button>
 		</div>
-		
-		<% session.removeAttribute("alertamensaje"); session.removeAttribute("alertatipo"); %>
+
+		<%
+			session.removeAttribute("alertamensaje");
+		session.removeAttribute("alertatipo");
+		%>
 	</c:if>
 
 	<%-- ${pageContext.request.contextPath} --%>
