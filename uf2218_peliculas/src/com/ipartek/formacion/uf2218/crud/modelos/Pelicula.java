@@ -1,6 +1,7 @@
 package com.ipartek.formacion.uf2218.crud.modelos;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Pelicula {
 	private Long id;
@@ -10,6 +11,13 @@ public class Pelicula {
 	private boolean correcto = true;
 	
 	private String errorId, errorTitulo, errorGenero, errorFechaEstreno;
+	
+	public Pelicula(String id, String titulo, String genero, String fechaEstreno) {
+		setId(id);
+		setTitulo(titulo);
+		setGenero(genero);
+		setFechaEstreno(fechaEstreno);
+	}
 	
 	public Pelicula(Long id, String titulo, String genero, LocalDate fechaEstreno) {
 		setId(id);
@@ -28,6 +36,17 @@ public class Pelicula {
 		this.id = id;
 	}
 
+	// Sobrecarga de setId para String
+	public void setId(String id) {
+		Long peliculaId;
+		try {
+			peliculaId = id.length() == 0 ? null : Long.parseLong(id);
+			setId(peliculaId);
+		} catch (NumberFormatException e) {
+			setErrorId("El id debe ser numérico");
+		}
+	}
+	
 	public String getTitulo() {
 		return titulo;
 	}
@@ -46,16 +65,27 @@ public class Pelicula {
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
-
-	public LocalDate getFechaEstreno() {
-		return fechaEstreno;
-	}
-
+	
 	public void setFechaEstreno(LocalDate fechaEstreno) {
 		if(fechaEstreno.isAfter(LocalDate.now())) {
 			setErrorFechaEstreno("No se admiten estrenos futuros");
 		}
 		this.fechaEstreno = fechaEstreno;
+	}
+	
+	// Sobrecarga de setFechaEstreno de String
+	public void setFechaEstreno(String fechaEstreno) {
+		LocalDate peliculaFechaEstreno;
+		try {
+			peliculaFechaEstreno = LocalDate.parse(fechaEstreno, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			setFechaEstreno(peliculaFechaEstreno);
+		} catch (Exception e) {
+			setErrorFechaEstreno("La fecha debe tener un formato 1234-12-12");
+		}
+	}
+	
+	public LocalDate getFechaEstreno() {
+		return fechaEstreno;
 	}
 
 	public boolean isCorrecto() {

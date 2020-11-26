@@ -7,13 +7,16 @@
 
 	<div class="col-12">
 		<form action="admin/guardar" method="post">
-			<div class="form-group row">
+			<input type="hidden" name="id" value="${pelicula.id}" />
+			
+			<%-- <div class="form-group row">
 				<label for="id" class="col-sm-2 col-form-label">Id</label>
 				<div class="col-sm-10">
-					<input type="number" class="form-control" id="id" name="id"
+					<input type="number" class="form-control ${pelicula.errorId != null ? 'is-invalid' : '' }" id="id" name="id"
 						value="${pelicula.id}" readonly>
+					<div class="invalid-feedback">${pelicula.errorId}</div>
 				</div>
-			</div>
+			</div> --%>
 			<div class="form-group row">
 				<label for="nombre" class="col-sm-2 col-form-label">Título</label>
 				<div class="col-sm-10">

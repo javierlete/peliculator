@@ -1,8 +1,6 @@
 package com.ipartek.formacion.uf2218.crud.controladores;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,10 +25,8 @@ public class PeliculaGuardarServlet extends HttpServlet {
 		String fechaEstreno = request.getParameter("fecha-estreno");
 		
 		// 2. Empaquetar en objeto del modelo (entidad)
-		Long peliculaId = id.length() == 0 ? null : Long.parseLong(id);
-		LocalDate peliculaFechaEstreno = LocalDate.parse(fechaEstreno, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		
-		Pelicula pelicula = new Pelicula(peliculaId, titulo, genero, peliculaFechaEstreno);
+		Pelicula pelicula = new Pelicula(id, titulo, genero, fechaEstreno);
 		
 		// 3. Tomar decisiones en base a los datos recibidos
 		
@@ -43,7 +39,7 @@ public class PeliculaGuardarServlet extends HttpServlet {
 		String alertaMensaje, alertaTipo, op = null;
 		
 		try {
-			if(peliculaId == null) {
+			if(pelicula.getId() == null) {
 				op = "inserción";
 				PeliculasDAO.insertar(pelicula);
 				
