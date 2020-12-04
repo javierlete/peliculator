@@ -17,6 +17,9 @@ public class PeliculaGuardarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Cambiar la codificación a la hora de leer todos los parámetros a UTF8
+		//request.setCharacterEncoding("utf8");
+		
 		// 1. Recepción de parámetros
 		String id = request.getParameter("id");
 		String titulo = request.getParameter("titulo");
