@@ -19,18 +19,13 @@
 				<td>${pelicula.titulo}</td>
 				<td>${pelicula.genero}</td>
 				<td>${pelicula.fechaEstreno}</td>
-				<td>
-					<form class="form-inline" action="admin/pelicula" method="post">
-						<a class="btn btn-primary" href="admin/pelicula?id=${pelicula.id}">Editar</a>
-
+				<td><a class="btn btn-primary"
+					href="admin/pelicula?id=${pelicula.id}">Editar</a> <%-- <form class="form-inline" action="admin/pelicula" method="post">
 						<input type="hidden" name="id" value="${pelicula.id}">
 						<button class="btn btn-secondary">Editar con Post</button>
-
-						<a class="btn btn-danger"
-							onclick="return confirm('¿Estás seguro?')" href="admin/borrar?id=${pelicula.id}">Borrar</a>
-
-					</form>
-				</td>
+					</form> --%> <a class="btn btn-danger"
+					onclick="return confirm('¿Estás seguro?')"
+					href="admin/borrar?id=${pelicula.id}">Borrar</a></td>
 			</tr>
 		</c:forEach>
 	</tbody>
