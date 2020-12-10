@@ -31,8 +31,11 @@
 			<div class="form-group row">
 				<label for="genero" class="col-sm-2 col-form-label">Género</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="genero" name="genero"
-						value="${pelicula.genero.nombre}">
+					<select class="custom-select" id="genero" name="genero">
+						<c:forEach items="${generos}" var="genero">
+							<option value="${genero.id}" ${pelicula.genero.id == genero.id ? 'selected' : '' }>${genero.nombre}</option>
+						</c:forEach>
+					</select>
 				</div>
 			</div>
 

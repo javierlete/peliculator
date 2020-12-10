@@ -7,12 +7,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.ipartek.formacion.uf2218.crud.modelos.Genero;
 import com.ipartek.formacion.uf2218.crud.modelos.Pelicula;
 
 public class PeliculasDaoMySql implements Dao<Pelicula> {
 
+	private static final Logger LOGGER = Logger.getLogger(PeliculasDaoMySql.class.getName());
+	
 	// SINGLETON
 	private PeliculasDaoMySql() {
 	}
@@ -24,15 +28,16 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 	}
 	// FIN SINGLETON
 
-	// characterEncoding=UTF-8 cambia la codificación de los PreparedStatement de Windows-1252 a UTF-8
+	// characterEncoding=UTF-8 cambia la codificación de los PreparedStatement de
+	// Windows-1252 a UTF-8
 	private static final String URL = "jdbc:mysql://localhost:3306/peliculas_bdd?characterEncoding=UTF-8";
 	private static final String USER = "debian-sys-maint";
 	private static final String PASS = "o8lAkaNtX91xMUcV";
 
-	private static final String SQL_SELECT = "SELECT * FROM peliculas";
-	private static final String SQL_SELECT_ID = "SELECT * FROM peliculas WHERE id = ?";
-	private static final String SQL_INSERT = "INSERT INTO peliculas (titulo, genero, fecha_estreno) VALUES (?, ?, ?)";
-	private static final String SQL_UPDATE = "UPDATE peliculas SET titulo = ?, genero = ?, fecha_estreno = ? WHERE id = ?";
+	private static final String SQL_SELECT = "SELECT * FROM peliculas p JOIN generos g ON p.id_genero = g.id";
+	private static final String SQL_SELECT_ID = "SELECT * FROM peliculas p JOIN generos g ON p.id_genero = g.id WHERE p.id = ?";
+	private static final String SQL_INSERT = "INSERT INTO peliculas (titulo, id_genero, fecha_estreno) VALUES (?, ?, ?)";
+	private static final String SQL_UPDATE = "UPDATE peliculas SET titulo = ?, id_genero = ?, fecha_estreno = ? WHERE id = ?";
 	private static final String SQL_DELETE = "DELETE FROM peliculas WHERE id = ?";
 
 	// EJEMPLO DE INYECCIÓN DE SQL
@@ -60,12 +65,15 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 			ArrayList<Pelicula> peliculas = new ArrayList<>();
 
 			Pelicula pelicula;
+			Genero genero;
 
 			// Para convertir las filas de una tabla de la base de datos en objetos de una
 			// colección
 			while (rs.next()) {
-				pelicula = new Pelicula(rs.getLong("id"), rs.getString("titulo"), new Genero(null, rs.getString("genero"), null),
-						rs.getDate("fecha_estreno").toLocalDate());
+				genero = new Genero(rs.getLong("g.id"), rs.getString("g.nombre"), rs.getString("g.descripcion"));
+				
+				pelicula = new Pelicula(rs.getLong("p.id"), rs.getString("p.titulo"), genero,
+						rs.getDate("p.fecha_estreno").toLocalDate());
 
 				peliculas.add(pelicula);
 			}
@@ -89,9 +97,13 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 
 				Pelicula pelicula = null;
 
+				Genero genero = null;
+				
 				if (rs.next()) {
-					pelicula = new Pelicula(rs.getLong("id"), rs.getString("titulo"), new Genero(null, rs.getString("genero"), null),
-							rs.getDate("fecha_estreno").toLocalDate());
+					genero = new Genero(rs.getLong("g.id"), rs.getString("g.nombre"), rs.getString("g.descripcion"));
+					
+					pelicula = new Pelicula(rs.getLong("p.id"), rs.getString("p.titulo"), genero,
+							rs.getDate("p.fecha_estreno").toLocalDate());
 				}
 
 				return pelicula;
@@ -107,14 +119,14 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 				PreparedStatement ps = con.prepareStatement(SQL_INSERT);) {
 
 			ps.setString(1, pelicula.getTitulo());
-			ps.setString(2, pelicula.getGenero().getNombre());
+			ps.setLong(2, pelicula.getGenero().getId());
 			ps.setObject(3, pelicula.getFechaEstreno());
-			
+
 			int numeroRegistrosInsertados = ps.executeUpdate();
-			
-			if(numeroRegistrosInsertados == 0) {
+
+			if (numeroRegistrosInsertados == 0) {
 				throw new AccesoDatosException("No se ha conseguido insertar el registro");
-			} else if(numeroRegistrosInsertados > 1) {
+			} else if (numeroRegistrosInsertados > 1) {
 				throw new AccesoDatosException("SE HA INSERTADO MÁS DE UN REGISTRO");
 			}
 
@@ -129,19 +141,20 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 				PreparedStatement ps = con.prepareStatement(SQL_UPDATE);) {
 
 			ps.setString(1, pelicula.getTitulo());
-			ps.setString(2, pelicula.getGenero().getNombre());
+			ps.setLong(2, pelicula.getGenero().getId());
 			ps.setObject(3, pelicula.getFechaEstreno());
 			ps.setLong(4, pelicula.getId());
-			
+
 			int numeroRegistrosModificados = ps.executeUpdate();
-			
-			if(numeroRegistrosModificados == 0) {
+
+			if (numeroRegistrosModificados == 0) {
 				throw new AccesoDatosException("No se ha encontrado el registro a modificar");
-			} else if(numeroRegistrosModificados > 1) {
+			} else if (numeroRegistrosModificados > 1) {
 				throw new AccesoDatosException("SE HA MODIFICADO MÁS DE UN REGISTRO");
 			}
 
 		} catch (SQLException e) {
+			LOGGER.log(Level.SEVERE, "Ha habido un problema al modificar la película", e);
 			throw new AccesoDatosException("Ha habido un problema al modificar la película", e);
 		}
 	}
@@ -154,10 +167,10 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 			ps.setLong(1, id);
 
 			int numeroRegistrosBorrados = ps.executeUpdate();
-			
-			if(numeroRegistrosBorrados == 0) {
+
+			if (numeroRegistrosBorrados == 0) {
 				throw new AccesoDatosException("Se ha intentado borrar un id inexistente");
-			} else if(numeroRegistrosBorrados > 1) {
+			} else if (numeroRegistrosBorrados > 1) {
 				throw new AccesoDatosException("SE HA BORRADO MÁS DE UN REGISTRO");
 			}
 

@@ -24,12 +24,15 @@ public class PeliculaGuardarServlet extends HttpServlet {
 		// 1. Recepción de parámetros
 		String id = request.getParameter("id");
 		String titulo = request.getParameter("titulo");
-		String genero = request.getParameter("genero");
+		String generoTexto = request.getParameter("genero");
 		String fechaEstreno = request.getParameter("fecha-estreno");
 		
 		// 2. Empaquetar en objeto del modelo (entidad)
+		Long generoId = Long.parseLong(generoTexto);
 		
-		Pelicula pelicula = new Pelicula(id, titulo, new Genero(null, genero, null), fechaEstreno);
+		Genero genero = Configuracion.daoGenero.obtenerPorId(generoId);
+		
+		Pelicula pelicula = new Pelicula(id, titulo, genero, fechaEstreno);
 		
 		// 3. Tomar decisiones en base a los datos recibidos
 		

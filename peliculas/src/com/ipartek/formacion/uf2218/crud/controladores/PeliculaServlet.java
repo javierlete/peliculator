@@ -32,6 +32,8 @@ public class PeliculaServlet extends HttpServlet {
 			request.setAttribute("pelicula", pelicula);
 		}
 		
+		request.setAttribute("generos", Configuracion.daoGenero.obtenerTodos());
+		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/vistas/admin/pelicula.jsp");
 		requestDispatcher.forward(request, response);
 	}
