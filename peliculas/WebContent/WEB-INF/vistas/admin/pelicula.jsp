@@ -6,7 +6,7 @@
 	<h1 class="col-12">Edición de película</h1>
 
 	<div class="col-12">
-		<form action="admin/guardar" method="post">
+		<form action="admin/guardar" method="post" class="needs-validation" novalidate>
 			<input type="hidden" name="id" value="${pelicula.id}" />
 			
 			<%-- <div class="form-group row">
@@ -23,8 +23,8 @@
 					<input type="text"
 						class="form-control ${pelicula.errorTitulo != null ? 'is-invalid' : '' }"
 						id="titulo" name="titulo" placeholder="El título de la película"
-						value="${pelicula.titulo}">
-					<div class="invalid-feedback">${pelicula.errorTitulo}</div>
+						value="${pelicula.titulo}" minlength="3" required>
+					<div class="invalid-feedback">${pelicula.errorTitulo != null ? pelicula.errorTitulo : 'El título de película es requerido y tiene que tener 3 caracteres como mínimo' }</div>
 				</div>
 			</div>
 
@@ -44,7 +44,7 @@
 						class="form-control ${pelicula.errorFechaEstreno != null ? 'is-invalid' : '' }"
 						id="fecha-estreno" name="fecha-estreno"
 						value="${pelicula.fechaEstreno}">
-					<div class="invalid-feedback">${pelicula.errorFechaEstreno}</div>
+					<div class="invalid-feedback">${pelicula.errorFechaEstreno != null ? 'is-invalid' : 'Sólo se admiten fechas de estreno anteriores o iguales a hoy' }</div>
 				</div>
 			</div>
 
@@ -60,12 +60,5 @@
 
 
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-	crossorigin="anonymous"></script>
 
 <%@ include file="/WEB-INF/vistas/includes/pie.jsp"%>
