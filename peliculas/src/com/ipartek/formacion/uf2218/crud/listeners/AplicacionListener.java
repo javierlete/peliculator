@@ -10,8 +10,6 @@ import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import com.ipartek.formacion.uf2218.crud.filtros.AdminFilter;
-
 /**
  * Application Lifecycle Listener implementation class AplicacionListener
  *
@@ -48,15 +46,9 @@ public class AplicacionListener implements ServletContextListener, HttpSessionLi
 	}
 
 	@Override
-	public void attributeRemoved(HttpSessionBindingEvent se) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void attributeRemoved(HttpSessionBindingEvent se) {}
 
 	@Override
-	public void attributeReplaced(HttpSessionBindingEvent se) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void attributeReplaced(HttpSessionBindingEvent se) {}
 	
 }
