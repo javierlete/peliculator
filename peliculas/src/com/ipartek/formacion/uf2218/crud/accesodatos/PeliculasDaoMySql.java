@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.ipartek.formacion.uf2218.crud.modelos.Genero;
 import com.ipartek.formacion.uf2218.crud.modelos.Pelicula;
 
 public class PeliculasDaoMySql implements Dao<Pelicula> {
@@ -63,7 +64,7 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 			// Para convertir las filas de una tabla de la base de datos en objetos de una
 			// colección
 			while (rs.next()) {
-				pelicula = new Pelicula(rs.getLong("id"), rs.getString("titulo"), rs.getString("genero"),
+				pelicula = new Pelicula(rs.getLong("id"), rs.getString("titulo"), new Genero(null, rs.getString("genero"), null),
 						rs.getDate("fecha_estreno").toLocalDate());
 
 				peliculas.add(pelicula);
@@ -89,7 +90,7 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 				Pelicula pelicula = null;
 
 				if (rs.next()) {
-					pelicula = new Pelicula(rs.getLong("id"), rs.getString("titulo"), rs.getString("genero"),
+					pelicula = new Pelicula(rs.getLong("id"), rs.getString("titulo"), new Genero(null, rs.getString("genero"), null),
 							rs.getDate("fecha_estreno").toLocalDate());
 				}
 
@@ -106,7 +107,7 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 				PreparedStatement ps = con.prepareStatement(SQL_INSERT);) {
 
 			ps.setString(1, pelicula.getTitulo());
-			ps.setString(2, pelicula.getGenero());
+			ps.setString(2, pelicula.getGenero().getNombre());
 			ps.setObject(3, pelicula.getFechaEstreno());
 			
 			int numeroRegistrosInsertados = ps.executeUpdate();
@@ -128,7 +129,7 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 				PreparedStatement ps = con.prepareStatement(SQL_UPDATE);) {
 
 			ps.setString(1, pelicula.getTitulo());
-			ps.setString(2, pelicula.getGenero());
+			ps.setString(2, pelicula.getGenero().getNombre());
 			ps.setObject(3, pelicula.getFechaEstreno());
 			ps.setLong(4, pelicula.getId());
 			

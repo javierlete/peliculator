@@ -17,7 +17,7 @@
 			<tr>
 				<th>${pelicula.id}</th>
 				<td>${pelicula.titulo}</td>
-				<td>${pelicula.genero}</td>
+				<td>${pelicula.genero.nombre}</td>
 				<td>${pelicula.fechaEstreno}</td>
 				<td><a class="btn btn-primary"
 					href="admin/pelicula?id=${pelicula.id}">Editar</a> <%-- <form class="form-inline" action="admin/pelicula" method="post">

@@ -5,21 +5,22 @@ import java.time.format.DateTimeFormatter;
 
 public class Pelicula {
 	private Long id;
-	private String titulo, genero;
+	private String titulo;
 	private LocalDate fechaEstreno;
+	private Genero genero;
 	
 	private boolean correcto = true;
 	
 	private String errorId, errorTitulo, errorGenero, errorFechaEstreno;
 	
-	public Pelicula(String id, String titulo, String genero, String fechaEstreno) {
+	public Pelicula(String id, String titulo, Genero genero, String fechaEstreno) {
 		setId(id);
 		setTitulo(titulo);
 		setGenero(genero);
 		setFechaEstreno(fechaEstreno);
 	}
 	
-	public Pelicula(Long id, String titulo, String genero, LocalDate fechaEstreno) {
+	public Pelicula(Long id, String titulo, Genero genero, LocalDate fechaEstreno) {
 		setId(id);
 		setTitulo(titulo);
 		setGenero(genero);
@@ -58,11 +59,11 @@ public class Pelicula {
 		this.titulo = titulo;
 	}
 
-	public String getGenero() {
+	public Genero getGenero() {
 		return genero;
 	}
 
-	public void setGenero(String genero) {
+	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
 	

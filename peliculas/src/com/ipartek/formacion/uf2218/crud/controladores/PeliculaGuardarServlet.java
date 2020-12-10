@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.uf2218.crud.accesodatos.AccesoDatosException;
+import com.ipartek.formacion.uf2218.crud.modelos.Genero;
 import com.ipartek.formacion.uf2218.crud.modelos.Pelicula;
 
 @WebServlet("/admin/guardar")
@@ -28,7 +29,7 @@ public class PeliculaGuardarServlet extends HttpServlet {
 		
 		// 2. Empaquetar en objeto del modelo (entidad)
 		
-		Pelicula pelicula = new Pelicula(id, titulo, genero, fechaEstreno);
+		Pelicula pelicula = new Pelicula(id, titulo, new Genero(null, genero, null), fechaEstreno);
 		
 		// 3. Tomar decisiones en base a los datos recibidos
 		

@@ -32,7 +32,7 @@
 				<label for="genero" class="col-sm-2 col-form-label">Género</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="genero" name="genero"
-						value="${pelicula.genero}">
+						value="${pelicula.genero.nombre}">
 				</div>
 			</div>
 
