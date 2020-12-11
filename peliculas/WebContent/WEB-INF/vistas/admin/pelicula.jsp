@@ -6,9 +6,10 @@
 	<h1 class="col-12">Edición de película</h1>
 
 	<div class="col-12">
-		<form action="admin/guardar" method="post" class="needs-validation" novalidate>
+		<form action="admin/guardar" method="post" class="needs-validation"
+			novalidate enctype="multipart/form-data">
 			<input type="hidden" name="id" value="${pelicula.id}" />
-			
+
 			<%-- <div class="form-group row">
 				<label for="id" class="col-sm-2 col-form-label">Id</label>
 				<div class="col-sm-10">
@@ -29,11 +30,24 @@
 			</div>
 
 			<div class="form-group row">
+				<label for="nombre" class="col-sm-2 col-form-label">Foto</label>
+				<div class="col-sm-10">
+					<div class="custom-file">
+						<input type="file" class="custom-file-input"
+							id="customFileLangHTML" name="foto"> <label class="custom-file-label"
+							for="customFileLangHTML" data-browse="Elegir foto">Selecciona un archivo</label>
+					</div>
+					<div class="invalid-feedback">${pelicula.errorTitulo != null ? pelicula.errorTitulo : 'El título de película es requerido y tiene que tener 3 caracteres como mínimo' }</div>
+				</div>
+			</div>
+
+			<div class="form-group row">
 				<label for="genero" class="col-sm-2 col-form-label">Género</label>
 				<div class="col-sm-10">
 					<select class="custom-select" id="genero" name="genero">
 						<c:forEach items="${generos}" var="genero">
-							<option value="${genero.id}" ${pelicula.genero.id == genero.id ? 'selected' : '' }>${genero.nombre}</option>
+							<option value="${genero.id}"
+								${pelicula.genero.id == genero.id ? 'selected' : '' }>${genero.nombre}</option>
 						</c:forEach>
 					</select>
 				</div>
