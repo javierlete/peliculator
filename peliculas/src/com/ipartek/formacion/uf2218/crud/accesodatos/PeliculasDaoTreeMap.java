@@ -10,8 +10,8 @@ public final class PeliculasDaoTreeMap implements Dao<Pelicula> {
 	//INICIO SINGLETON
 	private PeliculasDaoTreeMap() {
 		GenerosDaoTreeMap daoGenero = GenerosDaoTreeMap.getInstancia();
-		peliculas.put(1L, new Pelicula(1L, "Indiana Jones", daoGenero.obtenerPorId(1L), LocalDate.of(1980, 6, 5)));
-		peliculas.put(2L, new Pelicula(2L, "Superman", daoGenero.obtenerPorId(2L), LocalDate.of(1983, 1, 2)));
+		peliculas.put(1L, new Pelicula(1L, "Indiana Jones", daoGenero.obtenerPorId(1L), daoGenero.obtenerPorId(5L),LocalDate.of(1980, 6, 5)));
+		peliculas.put(2L, new Pelicula(2L, "Superman", daoGenero.obtenerPorId(2L), daoGenero.obtenerPorId(7L), LocalDate.of(1983, 1, 2)));
 	}
 	
 	private static PeliculasDaoTreeMap instancia = new PeliculasDaoTreeMap();

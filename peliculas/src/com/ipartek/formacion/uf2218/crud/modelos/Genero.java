@@ -3,6 +3,9 @@ package com.ipartek.formacion.uf2218.crud.modelos;
 public class Genero {
 	private Long id;
 	private String nombre, descripcion;
+	
+	private Iterable<Genero> subGeneros = null;
+	
 	public Genero(Long id, String nombre, String descripcion) {
 		super();
 		this.id = id;
@@ -26,6 +29,12 @@ public class Genero {
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	public Iterable<Genero> getSubGeneros() {
+		return subGeneros;
+	}
+	public void setSubGeneros(Iterable<Genero> subGeneros) {
+		this.subGeneros = subGeneros;
 	}
 	@Override
 	public int hashCode() {
@@ -64,7 +73,8 @@ public class Genero {
 	}
 	@Override
 	public String toString() {
-		return "Genero [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + "]";
+		return "Genero [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", subGeneros=" + subGeneros
+				+ "]";
 	}
 	
 	

@@ -73,7 +73,7 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 				genero = new Genero(rs.getLong("g.id"), rs.getString("g.nombre"), rs.getString("g.descripcion"));
 				
 				pelicula = new Pelicula(rs.getLong("p.id"), rs.getString("p.titulo"), genero,
-						rs.getDate("p.fecha_estreno").toLocalDate());
+						null, rs.getDate("p.fecha_estreno").toLocalDate());
 
 				peliculas.add(pelicula);
 			}
@@ -103,7 +103,7 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 					genero = new Genero(rs.getLong("g.id"), rs.getString("g.nombre"), rs.getString("g.descripcion"));
 					
 					pelicula = new Pelicula(rs.getLong("p.id"), rs.getString("p.titulo"), genero,
-							rs.getDate("p.fecha_estreno").toLocalDate());
+							null, rs.getDate("p.fecha_estreno").toLocalDate());
 				}
 
 				return pelicula;

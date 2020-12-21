@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.ipartek.formacion.uf2218.crud.accesodatos.AccesoDatosException;
-import com.ipartek.formacion.uf2218.crud.modelos.Genero;
 import com.ipartek.formacion.uf2218.crud.modelos.Pelicula;
 
 @WebServlet("/admin/guardar")
@@ -30,12 +29,8 @@ public class PeliculaGuardarServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// Cambiar la codificación a la hora de leer todos los parámetros a UTF8
 		// request.setCharacterEncoding("utf8");
-
-		// 1. Recepción de parámetros
-		String id = request.getParameter("id");
-		String titulo = request.getParameter("titulo");
-		String generoTexto = request.getParameter("genero");
-		String fechaEstreno = request.getParameter("fecha-estreno");
+		
+		Pelicula pelicula = Mapeadores.formularioAPelicula(request);
 		
 		String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
 		File uploadDir = new File(uploadPath);
@@ -52,23 +47,15 @@ public class PeliculaGuardarServlet extends HttpServlet {
 
 		LOGGER.info(fileName);
 
-		String fichero = uploadPath + File.separator + id + ".jpg";
+		String fichero = uploadPath + File.separator + pelicula.getId() + ".jpg";
 		part.write(fichero);
 		
 		LOGGER.info(fichero);
 
-		// 2. Empaquetar en objeto del modelo (entidad)
-		Long generoId = Long.parseLong(generoTexto);
-
-		Genero genero = Configuracion.daoGenero.obtenerPorId(generoId);
-
-		Pelicula pelicula = new Pelicula(id, titulo, genero, fechaEstreno);
-
 		// 3. Tomar decisiones en base a los datos recibidos
 
 		if (!pelicula.isCorrecto()) {
-			request.setAttribute("pelicula", pelicula);
-			request.getRequestDispatcher("/WEB-INF/vistas/admin/pelicula.jsp").forward(request, response);
+			Mapeadores.peliculaAFormulario(request, response, pelicula);
 			return;
 		}
 

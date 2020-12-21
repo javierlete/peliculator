@@ -8,22 +8,25 @@ public class Pelicula {
 	private String titulo;
 	private LocalDate fechaEstreno;
 	private Genero genero;
+	private Genero subGenero;
 	
 	private boolean correcto = true;
 	
 	private String errorId, errorTitulo, errorGenero, errorFechaEstreno;
 	
-	public Pelicula(String id, String titulo, Genero genero, String fechaEstreno) {
+	public Pelicula(String id, String titulo, Genero genero, Genero subGenero, String fechaEstreno) {
 		setId(id);
 		setTitulo(titulo);
 		setGenero(genero);
+		setSubGenero(subGenero);
 		setFechaEstreno(fechaEstreno);
 	}
 	
-	public Pelicula(Long id, String titulo, Genero genero, LocalDate fechaEstreno) {
+	public Pelicula(Long id, String titulo, Genero genero, Genero subGenero, LocalDate fechaEstreno) {
 		setId(id);
 		setTitulo(titulo);
 		setGenero(genero);
+		setSubGenero(subGenero);
 		setFechaEstreno(fechaEstreno);
 	}
 
@@ -97,6 +100,14 @@ public class Pelicula {
 		this.correcto = correcto;
 	}
 
+	public Genero getSubGenero() {
+		return subGenero;
+	}
+
+	public void setSubGenero(Genero subGenero) {
+		this.subGenero = subGenero;
+	}
+
 	public String getErrorId() {
 		return errorId;
 	}
@@ -137,9 +148,11 @@ public class Pelicula {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + (correcto ? 1231 : 1237);
 		result = prime * result + ((fechaEstreno == null) ? 0 : fechaEstreno.hashCode());
 		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((subGenero == null) ? 0 : subGenero.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
 	}
@@ -153,6 +166,8 @@ public class Pelicula {
 		if (getClass() != obj.getClass())
 			return false;
 		Pelicula other = (Pelicula) obj;
+		if (correcto != other.correcto)
+			return false;
 		if (fechaEstreno == null) {
 			if (other.fechaEstreno != null)
 				return false;
@@ -168,6 +183,11 @@ public class Pelicula {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (subGenero == null) {
+			if (other.subGenero != null)
+				return false;
+		} else if (!subGenero.equals(other.subGenero))
+			return false;
 		if (titulo == null) {
 			if (other.titulo != null)
 				return false;
@@ -178,7 +198,8 @@ public class Pelicula {
 
 	@Override
 	public String toString() {
-		return "Pelicula [id=" + id + ", titulo=" + titulo + ", genero=" + genero + ", fechaEstreno=" + fechaEstreno
-				+ "]";
+		return "Pelicula [id=" + id + ", titulo=" + titulo + ", fechaEstreno=" + fechaEstreno + ", genero=" + genero
+				+ ", subGenero=" + subGenero + ", correcto=" + correcto + ", errorId=" + errorId + ", errorTitulo="
+				+ errorTitulo + ", errorGenero=" + errorGenero + ", errorFechaEstreno=" + errorFechaEstreno + "]";
 	}
 }

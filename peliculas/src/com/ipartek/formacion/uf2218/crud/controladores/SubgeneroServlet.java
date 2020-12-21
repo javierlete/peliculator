@@ -10,33 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.formacion.uf2218.crud.modelos.Pelicula;
 
-@WebServlet("/admin/pelicula")
-/**
- * Servlet para el mantenimiento de una película, facilitando las operaciones CRUD básicas
- */
-public class PeliculaServlet extends HttpServlet {
+@WebServlet("/admin/subgenero")
+public class SubgeneroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	/**
-	 * Visualización de la pantalla de detalles de la película
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String sId = request.getParameter("id");
-		
-		Pelicula pelicula = null;
-		
-		if(sId != null) {
-			Long id = Long.parseLong(sId);
-		
-			pelicula = Configuracion.dao.obtenerPorId(id);
-		}
+		Pelicula pelicula = Mapeadores.formularioAPelicula(request);
 		
 		Mapeadores.peliculaAFormulario(request, response, pelicula);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-	}	
-	
+	}
 
 }

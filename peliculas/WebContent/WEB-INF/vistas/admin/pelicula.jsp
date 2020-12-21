@@ -34,8 +34,9 @@
 				<div class="col-sm-10">
 					<div class="custom-file">
 						<input type="file" class="custom-file-input"
-							id="customFileLangHTML" name="foto"> <label class="custom-file-label"
-							for="customFileLangHTML" data-browse="Elegir foto">Selecciona un archivo</label>
+							id="customFileLangHTML" name="foto"> <label
+							class="custom-file-label" for="customFileLangHTML"
+							data-browse="Elegir foto">Selecciona un archivo</label>
 					</div>
 					<div class="invalid-feedback">${pelicula.errorTitulo != null ? pelicula.errorTitulo : 'El título de película es requerido y tiene que tener 3 caracteres como mínimo' }</div>
 				</div>
@@ -52,6 +53,22 @@
 					</select>
 				</div>
 			</div>
+
+			<c:if test="${subgeneros != null}">
+				<div class="form-group row">
+					<label for="subgenero" class="col-sm-2 col-form-label">Sub
+						Género</label>
+					<div class="col-sm-10">
+						<select class="custom-select" id="subgenero" name="subgenero">
+							<option value="0">No tiene sub género</option>
+							<c:forEach items="${subgeneros}" var="subgenero">
+								<option value="${subgenero.id}"
+									${pelicula.subGenero.id == subgenero.id ? 'selected' : '' }>${subgenero.nombre}</option>
+							</c:forEach>
+						</select>
+					</div>
+				</div>
+			</c:if>
 
 			<div class="form-group row">
 				<label for="fecha-estreno" class="col-sm-2 col-form-label">Fecha
@@ -77,5 +94,13 @@
 
 
 </div>
+
+<script>
+	document.getElementById('genero').onchange = function() {
+		document.forms[0].action = 'admin/subgenero';
+		document.forms[0].enctype = null;
+		document.forms[0].submit();
+	};
+</script>
 
 <%@ include file="/WEB-INF/vistas/includes/pie.jsp"%>

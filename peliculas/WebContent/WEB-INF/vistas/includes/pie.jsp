@@ -51,5 +51,6 @@
 <script>
 	$('#fecha-estreno')[0].max = new Date().toISOString().slice(0,10);
 </script>
+
 </body>
 </html>
