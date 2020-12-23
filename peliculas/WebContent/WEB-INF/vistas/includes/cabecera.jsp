@@ -67,10 +67,6 @@
 			</button>
 		</div>
 
-		<%
-			session.removeAttribute("alertamensaje");
-		session.removeAttribute("alertatipo");
-		%>
 	</c:if>
 
 	<%-- ${pageContext.request.contextPath} --%>
