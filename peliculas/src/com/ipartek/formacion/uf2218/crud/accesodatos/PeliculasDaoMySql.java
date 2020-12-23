@@ -1,7 +1,6 @@
 package com.ipartek.formacion.uf2218.crud.accesodatos;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +9,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import com.ipartek.formacion.uf2218.crud.modelos.Genero;
 import com.ipartek.formacion.uf2218.crud.modelos.Pelicula;
 
@@ -17,8 +21,17 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 
 	private static final Logger LOGGER = Logger.getLogger(PeliculasDaoMySql.class.getName());
 	
+	private DataSource dataSource;
+	
 	// SINGLETON
 	private PeliculasDaoMySql() {
+		try {
+			InitialContext initCtx=new InitialContext();
+			Context envCtx = (Context) initCtx.lookup("java:comp/env");
+			dataSource = (DataSource)envCtx.lookup("jdbc/peliculas");
+		} catch (NamingException e) {
+			throw new AccesoDatosException("No se ha encontrado el pool de conexiones", e);
+		}
 	}
 
 	private static final PeliculasDaoMySql INSTANCIA = new PeliculasDaoMySql();
@@ -27,12 +40,6 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 		return INSTANCIA;
 	}
 	// FIN SINGLETON
-
-	// characterEncoding=UTF-8 cambia la codificación de los PreparedStatement de
-	// Windows-1252 a UTF-8
-	private static final String URL = "jdbc:mysql://localhost:3306/peliculas_bdd?characterEncoding=UTF-8";
-	private static final String USER = "debian-sys-maint";
-	private static final String PASS = "o8lAkaNtX91xMUcV";
 
 	private static final String SQL_SELECT = "SELECT * FROM peliculas p JOIN generos g ON p.id_genero = g.id";
 	private static final String SQL_SELECT_ID = "SELECT * FROM peliculas p JOIN generos g ON p.id_genero = g.id WHERE p.id = ?";
@@ -59,7 +66,7 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 
 	@Override
 	public Iterable<Pelicula> obtenerTodos() {
-		try (Connection con = DriverManager.getConnection(URL, USER, PASS);
+		try (Connection con = dataSource.getConnection();
 				Statement s = con.createStatement();
 				ResultSet rs = s.executeQuery(SQL_SELECT);) {
 			ArrayList<Pelicula> peliculas = new ArrayList<>();
@@ -88,7 +95,7 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 	@Override
 	public Pelicula obtenerPorId(Long id) {
 
-		try (Connection con = DriverManager.getConnection(URL, USER, PASS);
+		try (Connection con = dataSource.getConnection();
 				PreparedStatement ps = con.prepareStatement(SQL_SELECT_ID);) {
 
 			ps.setLong(1, id);
@@ -115,7 +122,7 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 
 	@Override
 	public void insertar(Pelicula pelicula) {
-		try (Connection con = DriverManager.getConnection(URL, USER, PASS);
+		try (Connection con = dataSource.getConnection();
 				PreparedStatement ps = con.prepareStatement(SQL_INSERT);) {
 
 			ps.setString(1, pelicula.getTitulo());
@@ -137,7 +144,7 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 
 	@Override
 	public void modificar(Pelicula pelicula) {
-		try (Connection con = DriverManager.getConnection(URL, USER, PASS);
+		try (Connection con = dataSource.getConnection();
 				PreparedStatement ps = con.prepareStatement(SQL_UPDATE);) {
 
 			ps.setString(1, pelicula.getTitulo());
@@ -161,7 +168,7 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 
 	@Override
 	public void borrar(Long id) {
-		try (Connection con = DriverManager.getConnection(URL, USER, PASS);
+		try (Connection con = dataSource.getConnection();
 				PreparedStatement ps = con.prepareStatement(SQL_DELETE);) {
 
 			ps.setLong(1, id);
