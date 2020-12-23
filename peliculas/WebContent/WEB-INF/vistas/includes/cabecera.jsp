@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/dataTables.bootstrap4.min.css" />
 
+<link rel="stylesheet" href="css/impresora.css" media="print" />
+
 <title>Peliculator</title>
 </head>
 <body>
