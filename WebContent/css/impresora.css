@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+button, a.btn {
+	display: none;
+}
+
+table.dataTable th:last-child, table.dataTable td:last-child {
+	display: none;
+}
+
+#DataTables_Table_0_wrapper .row:first-of-type {
+	display: none;
+}
+
+#DataTables_Table_0_wrapper .row:last-of-type {
+	display: none;
+}
