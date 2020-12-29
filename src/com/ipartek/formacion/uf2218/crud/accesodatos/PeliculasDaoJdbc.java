@@ -17,35 +17,35 @@ import javax.sql.DataSource;
 import com.ipartek.formacion.uf2218.crud.modelos.Genero;
 import com.ipartek.formacion.uf2218.crud.modelos.Pelicula;
 
-public class PeliculasDaoMySql implements Dao<Pelicula> {
+public class PeliculasDaoJdbc implements Dao<Pelicula> {
 
-	private static final Logger LOGGER = Logger.getLogger(PeliculasDaoMySql.class.getName());
-	
+	private static final Logger LOGGER = Logger.getLogger(PeliculasDaoJdbc.class.getName());
+
 	private DataSource dataSource;
-	
+
 	// SINGLETON
-	private PeliculasDaoMySql() {
+	private PeliculasDaoJdbc() {
 		try {
-			InitialContext initCtx=new InitialContext();
+			InitialContext initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			dataSource = (DataSource)envCtx.lookup("jdbc/peliculas");
+			dataSource = (DataSource) envCtx.lookup("jdbc/peliculas");
 		} catch (NamingException e) {
 			throw new AccesoDatosException("No se ha encontrado el pool de conexiones", e);
 		}
 	}
 
-	private static final PeliculasDaoMySql INSTANCIA = new PeliculasDaoMySql();
+	private static final PeliculasDaoJdbc INSTANCIA = new PeliculasDaoJdbc();
 
-	public static PeliculasDaoMySql getInstancia() {
+	public static PeliculasDaoJdbc getInstancia() {
 		return INSTANCIA;
 	}
 	// FIN SINGLETON
 
-	private static final String SQL_SELECT = "SELECT * FROM peliculas p JOIN generos g ON p.id_genero = g.id";
-	private static final String SQL_SELECT_ID = "SELECT * FROM peliculas p JOIN generos g ON p.id_genero = g.id WHERE p.id = ?";
-	private static final String SQL_INSERT = "INSERT INTO peliculas (titulo, id_genero, fecha_estreno) VALUES (?, ?, ?)";
-	private static final String SQL_UPDATE = "UPDATE peliculas SET titulo = ?, id_genero = ?, fecha_estreno = ? WHERE id = ?";
-	private static final String SQL_DELETE = "DELETE FROM peliculas WHERE id = ?";
+	private static final String SQL_SELECT = "SELECT g.id gid, g.nombre gnombre, g.descripcion gdescripcion, p.id pid, p.titulo ptitulo, p.fecha_estreno pfecha_estreno FROM peliculas_bdd.peliculas p JOIN peliculas_bdd.generos g ON p.id_genero = g.id";
+	private static final String SQL_SELECT_ID = "SELECT g.id gid, g.nombre gnombre, g.descripcion gdescripcion, p.id pid, p.titulo ptitulo, p.fecha_estreno pfecha_estreno FROM peliculas_bdd.peliculas p JOIN peliculas_bdd.generos g ON p.id_genero = g.id WHERE p.id = ?";
+	private static final String SQL_INSERT = "INSERT INTO peliculas_bdd.peliculas (titulo, id_genero, fecha_estreno) VALUES (?, ?, ?)";
+	private static final String SQL_UPDATE = "UPDATE peliculas_bdd.peliculas SET titulo = ?, id_genero = ?, fecha_estreno = ? WHERE id = ?";
+	private static final String SQL_DELETE = "DELETE FROM peliculas_bdd.peliculas WHERE id = ?";
 
 	// EJEMPLO DE INYECCIÓN DE SQL
 	// fecha_estreno = "2000-1-1'); DROP TABLE peliculas;--
@@ -53,16 +53,6 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 	// "', '" + genero + "', '" + fecha_estreno + "');"
 	// "INSERT INTO peliculas (titulo, genero, fecha_estreno) VALUES ('asdf',
 	// 'asdf', '2000-1-1'); DROP TABLE peliculas; --');"
-
-	static {
-		try {
-			// Registramos el driver de MySQL de forma EXPLÍCITA ya que en las aplicaciones
-			// web lo necesitan todavía
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			throw new AccesoDatosException("No se ha podido cargar el driver de MySQL", e);
-		}
-	}
 
 	@Override
 	public Iterable<Pelicula> obtenerTodos() {
@@ -77,10 +67,10 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 			// Para convertir las filas de una tabla de la base de datos en objetos de una
 			// colección
 			while (rs.next()) {
-				genero = new Genero(rs.getLong("g.id"), rs.getString("g.nombre"), rs.getString("g.descripcion"));
-				
-				pelicula = new Pelicula(rs.getLong("p.id"), rs.getString("p.titulo"), genero,
-						null, rs.getDate("p.fecha_estreno").toLocalDate());
+				genero = new Genero(rs.getLong("gid"), rs.getString("gnombre"), rs.getString("gdescripcion"));
+
+				pelicula = new Pelicula(rs.getLong("pid"), rs.getString("ptitulo"), genero, null,
+						rs.getDate("pfecha_estreno").toLocalDate());
 
 				peliculas.add(pelicula);
 			}
@@ -95,8 +85,7 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 	@Override
 	public Pelicula obtenerPorId(Long id) {
 
-		try (Connection con = dataSource.getConnection();
-				PreparedStatement ps = con.prepareStatement(SQL_SELECT_ID);) {
+		try (Connection con = dataSource.getConnection(); PreparedStatement ps = con.prepareStatement(SQL_SELECT_ID);) {
 
 			ps.setLong(1, id);
 
@@ -105,12 +94,12 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 				Pelicula pelicula = null;
 
 				Genero genero = null;
-				
+
 				if (rs.next()) {
-					genero = new Genero(rs.getLong("g.id"), rs.getString("g.nombre"), rs.getString("g.descripcion"));
-					
-					pelicula = new Pelicula(rs.getLong("p.id"), rs.getString("p.titulo"), genero,
-							null, rs.getDate("p.fecha_estreno").toLocalDate());
+					genero = new Genero(rs.getLong("gid"), rs.getString("gnombre"), rs.getString("gdescripcion"));
+
+					pelicula = new Pelicula(rs.getLong("pid"), rs.getString("ptitulo"), genero, null,
+							rs.getDate("pfecha_estreno").toLocalDate());
 				}
 
 				return pelicula;
@@ -122,8 +111,7 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 
 	@Override
 	public void insertar(Pelicula pelicula) {
-		try (Connection con = dataSource.getConnection();
-				PreparedStatement ps = con.prepareStatement(SQL_INSERT);) {
+		try (Connection con = dataSource.getConnection(); PreparedStatement ps = con.prepareStatement(SQL_INSERT);) {
 
 			ps.setString(1, pelicula.getTitulo());
 			ps.setLong(2, pelicula.getGenero().getId());
@@ -144,8 +132,7 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 
 	@Override
 	public void modificar(Pelicula pelicula) {
-		try (Connection con = dataSource.getConnection();
-				PreparedStatement ps = con.prepareStatement(SQL_UPDATE);) {
+		try (Connection con = dataSource.getConnection(); PreparedStatement ps = con.prepareStatement(SQL_UPDATE);) {
 
 			ps.setString(1, pelicula.getTitulo());
 			ps.setLong(2, pelicula.getGenero().getId());
@@ -168,8 +155,7 @@ public class PeliculasDaoMySql implements Dao<Pelicula> {
 
 	@Override
 	public void borrar(Long id) {
-		try (Connection con = dataSource.getConnection();
-				PreparedStatement ps = con.prepareStatement(SQL_DELETE);) {
+		try (Connection con = dataSource.getConnection(); PreparedStatement ps = con.prepareStatement(SQL_DELETE);) {
 
 			ps.setLong(1, id);
 
