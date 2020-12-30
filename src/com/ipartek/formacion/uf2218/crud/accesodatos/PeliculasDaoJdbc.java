@@ -17,21 +17,32 @@ import javax.sql.DataSource;
 import com.ipartek.formacion.uf2218.crud.modelos.Genero;
 import com.ipartek.formacion.uf2218.crud.modelos.Pelicula;
 
+import org.apache.commons.dbcp2.BasicDataSource;
+
 public class PeliculasDaoJdbc implements Dao<Pelicula> {
 
 	private static final Logger LOGGER = Logger.getLogger(PeliculasDaoJdbc.class.getName());
 
-	private DataSource dataSource;
+	private BasicDataSource dataSource;
 
 	// SINGLETON
 	private PeliculasDaoJdbc() {
-		try {
-			InitialContext initCtx = new InitialContext();
-			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			dataSource = (DataSource) envCtx.lookup("jdbc/peliculas");
-		} catch (NamingException e) {
-			throw new AccesoDatosException("No se ha encontrado el pool de conexiones", e);
-		}
+		String dbUrl = System.getenv("JDBC_DATABASE_URL");
+        String username = System.getenv("JDBC_DATABASE_USERNAME");
+        String password = System.getenv("JDBC_DATABASE_PASSWORD");
+
+        dataSource = new BasicDataSource();
+        dataSource.setUrl(dbUrl);
+        dataSource.setUsername(username);
+		dataSource.setPassword(password);
+		
+		// try {
+		// 	InitialContext initCtx = new InitialContext();
+		// 	Context envCtx = (Context) initCtx.lookup("java:comp/env");
+		// 	dataSource = (DataSource) envCtx.lookup("jdbc/peliculas");
+		// } catch (NamingException e) {
+		// 	throw new AccesoDatosException("No se ha encontrado el pool de conexiones", e);
+		// }
 	}
 
 	private static final PeliculasDaoJdbc INSTANCIA = new PeliculasDaoJdbc();
