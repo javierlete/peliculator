@@ -1,11 +1,14 @@
 package com.ipartek.formacion.uf2218.crud.controladores;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ipartek.formacion.uf2218.crud.modelos.Usuario;
 
 @WebServlet("/login") //{"/", "/login"})
 public class LoginServlet extends HttpServlet {
@@ -19,7 +22,9 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		if("javier@lete.com".equals(email) && "contra".equals(password)) {
+		Usuario usuario = new Usuario(null, email, password);
+		
+		if(Configuracion.usuarioLogica.validarLogin(usuario)) {
 			request.getSession().setAttribute("email", email);
 			response.sendRedirect(request.getContextPath() + "/admin/listado");
 		} else {
