@@ -15,7 +15,10 @@ class Mapeadores {
 			throws ServletException, IOException {
 		request.setAttribute("pelicula", pelicula);
 		request.setAttribute("generos", Configuracion.daoGenero.obtenerTodos());
-		request.setAttribute("subgeneros", pelicula.getGenero().getSubGeneros());
+
+		if (pelicula != null) {
+			request.setAttribute("subgeneros", pelicula.getGenero().getSubGeneros());
+		}
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/vistas/admin/pelicula.jsp");
 		requestDispatcher.forward(request, response);
